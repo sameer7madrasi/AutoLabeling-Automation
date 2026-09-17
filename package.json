@@ -1,0 +1,22 @@
+{
+  "name": "autolabel-exo-e2e",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Playwright E2E proof-of-concept that validates a Microsoft Purview Auto-Labeling enforcement scenario in Exchange Online via Outlook Web.",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:debug": "playwright test --debug",
+    "typecheck": "tsc --noEmit",
+    "auth:reset": "node -e \"require('node:fs').rmSync('playwright/.auth/user.json', { force: true }); console.log('Saved Outlook session cleared.')\"",
+    "report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.47.2",
+    "@types/node": "^22.7.4",
+    "typescript": "^5.6.2"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5"
+  }
+}

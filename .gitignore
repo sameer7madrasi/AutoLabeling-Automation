@@ -1,0 +1,27 @@
+# Dependencies
+node_modules/
+
+# Secrets / local configuration
+.env
+.env.local
+*.pem
+
+# Authenticated Playwright session (contains live Microsoft 365 tokens)
+playwright/.auth/
+playwright/.auth/user.json
+
+# Test artifacts
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
+results/*
+!results/.gitkeep
+screenshots/*
+!screenshots/.gitkeep
+
+# Editor / OS noise
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
