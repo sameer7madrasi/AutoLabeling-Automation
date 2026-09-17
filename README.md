@@ -61,6 +61,34 @@ npx playwright install chromium
 cp .env.example .env      # Windows: copy .env.example .env
 ```
 
+## Quickstart on Windows
+
+Everything in this repo is cross-platform; only the shell syntax differs. In PowerShell:
+
+```powershell
+node -v                   # must be v18 or newer - install from https://nodejs.org if missing
+git clone https://github.com/sameer7madrasi/AutoLabeling-Automation.git
+cd AutoLabeling-Automation
+npm install
+npx playwright install chromium
+Copy-Item .env.example .env
+notepad .env              # set TEST_USER_EMAIL, save, close
+npm test
+```
+
+In `cmd.exe`, use `copy .env.example .env` instead of `Copy-Item`.
+
+Setting the debug flag needs PowerShell syntax, since `DEBUG_LABEL_LOCATOR=true npm test` is
+bash-only:
+
+```powershell
+$env:DEBUG_LABEL_LOCATOR="true"; npm test; Remove-Item Env:DEBUG_LABEL_LOCATOR
+```
+
+A real Chromium window opens so you can sign in, so run this on your desktop session rather than
+over a headless remote shell. `npm run auth:reset` clears the cached Outlook session if you need
+to sign in as a different user.
+
 ## Configuration
 
 Edit `.env`:
