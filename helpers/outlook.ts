@@ -248,13 +248,24 @@ export async function sendEmail(page: Page, options: SendEmailOptions): Promise<
   }
 }
 
+/**
+ * Tenants with policy notifications deliver a second mail titled
+ * "Notification: <our subject>", which matches a substring search for our subject
+ * and quotes the label name in its body. Opening it would let the test pass without
+ * ever inspecting the delivered message, so those rows are excluded here.
+ */
+const NOT_A_NOTIFICATION = { hasNotText: /Notification:/i };
+
 function messageListItems(page: Page, subject: string): Locator[] {
   const escaped = subject.replace(/"/g, '\\"');
   return [
     // Row aria-labels contain the full subject even when the text is truncated.
-    page.locator(`div[role="option"][aria-label*="${escaped}"]`),
-    page.getByRole('option').filter({ hasText: subject }),
-    page.locator('div[role="listbox"] div[role="option"]').filter({ hasText: subject }),
+    page.locator(`div[role="option"][aria-label*="${escaped}"]`).filter(NOT_A_NOTIFICATION),
+    page.getByRole('option').filter({ hasText: subject }).filter(NOT_A_NOTIFICATION),
+    page
+      .locator('div[role="listbox"] div[role="option"]')
+      .filter({ hasText: subject })
+      .filter(NOT_A_NOTIFICATION),
   ];
 }
 
@@ -264,6 +275,15 @@ async function findMessageRow(page: Page, subject: string): Promise<Locator | nu
     if (await row.isVisible().catch(() => false)) return row;
   }
   return null;
+}
+
+/** Makes the Inbox the active folder so the scan cannot read another view. */
+async function ensureInboxSelected(page: Page): Promise<void> {
+  const inbox = page.getByRole('treeitem', { name: /^inbox/i }).first();
+  if (await inbox.isVisible().catch(() => false)) {
+    await inbox.click().catch(() => undefined);
+    await page.waitForTimeout(1_500);
+  }
 }
 
 async function refreshInbox(page: Page): Promise<void> {
@@ -298,6 +318,7 @@ export async function waitForAndOpenMessage(
   config: TestConfig,
 ): Promise<void> {
   let useSearch = false;
+  await ensureInboxSelected(page);
 
   const row = await pollUntil<Locator>(() => findMessageRow(page, subject), {
     timeoutMs: config.emailArrivalTimeoutMs,
@@ -330,25 +351,35 @@ export async function waitForAndOpenMessage(
   }
 
   await row.click();
+  // Confirm the reading pane really shows the delivered message and not a
+  // notification mail that merely mentions our subject.
   const opened = await pollUntil(
     async () => {
       const pane = await readingPane(page);
-      const visible = await pane
-        .getByText(subject, { exact: false })
-        .first()
-        .isVisible()
-        .catch(() => false);
-      return visible ? true : null;
+      const heading = pane
+        .getByRole('heading')
+        .filter({ hasText: subject })
+        .filter(NOT_A_NOTIFICATION)
+        .first();
+      if (await heading.isVisible().catch(() => false)) {
+        return (await heading.innerText().catch(() => subject)).trim();
+      }
+      const exact = pane.getByText(subject, { exact: true }).first();
+      if (await exact.isVisible().catch(() => false)) return subject;
+      return null;
     },
     { timeoutMs: 30_000, intervalMs: 1_000 },
   );
 
   if (!opened) {
     throw new Error(
-      `Clicked the message row for "${subject}" but the reading pane never showed that subject. ` +
-        'Check READING_PANE_CANDIDATES in helpers/outlook.ts.',
+      `Clicked the message row for "${subject}" but the reading pane never showed that exact subject. ` +
+        'A policy-notification mail may have been opened instead, or READING_PANE_CANDIDATES in ' +
+        'helpers/outlook.ts needs updating for this tenant.',
     );
   }
+
+  console.log(`[inbox] Opened message with header subject: "${opened}"`);
 }
 
 /** Re-opens the message so Outlook re-fetches header metadata, including the label. */
