@@ -12,6 +12,7 @@ scenario in **Exchange Online**, driven entirely through the Outlook Web UI with
 | SIT trigger text | `SingleLocationScope-Enforcement-SIT` |
 | Expected sensitivity label | `EnforcementTest-Label` |
 | Outcome | One PASS/FAIL result per run, in the console and as JSON |
+| Status | Verified end-to-end against a live tenant: send, delivery, and label detection all pass |
 
 ### Manual process being automated
 
@@ -44,6 +45,24 @@ message header until the expected sensitivity label appears → report PASS/FAIL
 - **Failures explain themselves.** A failed run captures a full-page screenshot, the page HTML,
   a dump of every DOM element mentioning sensitivity/label/enforcement, a Playwright trace, and
   a JSON result file.
+- **Policy notification mail is explicitly rejected.** When the tenant emails a
+  "Notification: &lt;subject&gt;" mail about the test message, that mail contains our unique subject
+  as a substring *and* quotes the label name in its body. The run excludes notification rows and
+  verifies the opened message's header subject before reading the label, so the check can only
+  ever pass on the delivered message.
+
+## Tenant UI variations already handled
+
+Outlook Web ships in more than one shape, and both are supported:
+
+| Element | Simplified ribbon | Classic ribbon (verified tenant) |
+| --- | --- | --- |
+| Compose button | `New mail` | `New` (`data-automation-type="RibbonSplitButton"`) |
+| Recipient field | role `textbox`/`combobox` named `To` | `div[aria-label="To"][contenteditable="true"]`, no role |
+| Sensitivity label | accessible name containing "Sensitivity" | bare text span beside a `ShieldBundled` icon |
+
+All candidate locators live in the `*_CANDIDATES` arrays and `LABEL_CHIP_SELECTORS` at the top of
+`helpers/outlook.ts`, tried in order, so a third variation is a one-line addition.
 
 ## Prerequisites
 
