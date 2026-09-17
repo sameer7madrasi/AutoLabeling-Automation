@@ -8,6 +8,7 @@
     "test:headed": "playwright test --headed",
     "test:debug": "playwright test --debug",
     "typecheck": "tsc --noEmit",
+    "report:build": "playwright test --config=reports/report.config.ts",
     "auth:reset": "node -e \"require('node:fs').rmSync('playwright/.auth/user.json', { force: true }); console.log('Saved Outlook session cleared.')\"",
     "report": "playwright show-report"
   },

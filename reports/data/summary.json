@@ -1,0 +1,288 @@
+{
+  "total": 42,
+  "passed": 34,
+  "tbc": 7,
+  "clarification": 1,
+  "open": 8,
+  "byPriority": [
+    {
+      "priority": "P1",
+      "total": 25,
+      "pass": 22,
+      "tbc": 3,
+      "clarification": 0
+    },
+    {
+      "priority": "P2",
+      "total": 15,
+      "pass": 11,
+      "tbc": 3,
+      "clarification": 1
+    },
+    {
+      "priority": "P3",
+      "total": 2,
+      "pass": 1,
+      "tbc": 1,
+      "clarification": 0
+    }
+  ],
+  "sections": [
+    {
+      "key": "S1",
+      "short": "Enforcement (SIT)",
+      "total": 5,
+      "pass": 5,
+      "tbc": 0,
+      "clarification": 0
+    },
+    {
+      "key": "S2",
+      "short": "Override label",
+      "total": 4,
+      "pass": 3,
+      "tbc": 1,
+      "clarification": 0
+    },
+    {
+      "key": "S3",
+      "short": "Remove label",
+      "total": 3,
+      "pass": 1,
+      "tbc": 2,
+      "clarification": 0
+    },
+    {
+      "key": "S4",
+      "short": "Simulation mode",
+      "total": 5,
+      "pass": 4,
+      "tbc": 1,
+      "clarification": 0
+    },
+    {
+      "key": "S5",
+      "short": "Negative & edge",
+      "total": 4,
+      "pass": 1,
+      "tbc": 3,
+      "clarification": 0
+    },
+    {
+      "key": "S6",
+      "short": "Policy management",
+      "total": 3,
+      "pass": 3,
+      "tbc": 0,
+      "clarification": 0
+    },
+    {
+      "key": "S7",
+      "short": "Reporting UX - Simulation",
+      "total": 8,
+      "pass": 7,
+      "tbc": 0,
+      "clarification": 1
+    },
+    {
+      "key": "S8",
+      "short": "Reporting UX - Enforcement",
+      "total": 9,
+      "pass": 9,
+      "tbc": 0,
+      "clarification": 0
+    },
+    {
+      "key": "S9",
+      "short": "Activity Explorer",
+      "total": 1,
+      "pass": 1,
+      "tbc": 0,
+      "clarification": 0
+    }
+  ],
+  "tiers": [
+    {
+      "tier": 1,
+      "label": "Automatable now",
+      "description": "Validated entirely in Outlook Web against a policy that already exists in the tenant.",
+      "count": 3,
+      "ids": [
+        "TC-003",
+        "TC-009",
+        "TC-018"
+      ]
+    },
+    {
+      "tier": 2,
+      "label": "Needs SPO/ODB UI work",
+      "description": "Same pattern as the shipped test but requires SharePoint or OneDrive file automation.",
+      "count": 12,
+      "ids": [
+        "TC-001",
+        "TC-002",
+        "TC-004",
+        "TC-005",
+        "TC-006",
+        "TC-007",
+        "TC-008",
+        "TC-010",
+        "TC-011",
+        "TC-012",
+        "TC-019",
+        "TC-020"
+      ]
+    },
+    {
+      "tier": 3,
+      "label": "Needs Purview portal work",
+      "description": "Requires policy lifecycle actions or reading Purview report surfaces.",
+      "count": 25,
+      "ids": [
+        "TC-013",
+        "TC-014",
+        "TC-015",
+        "TC-016",
+        "TC-017",
+        "TC-022",
+        "TC-023",
+        "TC-024",
+        "TC-025",
+        "TC-026",
+        "TC-027",
+        "TC-028",
+        "TC-029",
+        "TC-030",
+        "TC-031",
+        "TC-033",
+        "TC-034",
+        "TC-035",
+        "TC-036",
+        "TC-037",
+        "TC-038",
+        "TC-039",
+        "TC-040",
+        "TC-041",
+        "TC-042"
+      ]
+    },
+    {
+      "tier": 4,
+      "label": "Manual for now",
+      "description": "Not reliably automatable as written today.",
+      "count": 2,
+      "ids": [
+        "TC-021",
+        "TC-032"
+      ]
+    }
+  ],
+  "openItems": [
+    {
+      "id": "TC-008",
+      "priority": "P1",
+      "status": "TBC",
+      "name": "Override Label – Without Override Enabled",
+      "sectionShort": "Override label"
+    },
+    {
+      "id": "TC-010",
+      "priority": "P1",
+      "status": "TBC",
+      "name": "Remove Label – SPO",
+      "sectionShort": "Remove label"
+    },
+    {
+      "id": "TC-011",
+      "priority": "P1",
+      "status": "TBC",
+      "name": "Remove Label – ODB",
+      "sectionShort": "Remove label"
+    },
+    {
+      "id": "TC-017",
+      "priority": "P2",
+      "status": "TBC",
+      "name": "Simulation – Auto-Enable After (Scheduled Enforcement)",
+      "sectionShort": "Simulation mode"
+    },
+    {
+      "id": "TC-019",
+      "priority": "P2",
+      "status": "TBC",
+      "name": "Edge Case – Multiple File Types",
+      "sectionShort": "Negative & edge"
+    },
+    {
+      "id": "TC-020",
+      "priority": "P3",
+      "status": "TBC",
+      "name": "Edge Case – Large File (>10 MB)",
+      "sectionShort": "Negative & edge"
+    },
+    {
+      "id": "TC-021",
+      "priority": "P2",
+      "status": "TBC",
+      "name": "Edge Case – Failed Labeling",
+      "sectionShort": "Negative & edge"
+    },
+    {
+      "id": "TC-032",
+      "priority": "P2",
+      "status": "Clarification Needed",
+      "name": "Simulation Overview – Simulation Accuracy (Policy Grading)",
+      "sectionShort": "Reporting UX - Simulation"
+    }
+  ],
+  "automatedIds": [
+    "TC-003"
+  ],
+  "automatedCount": 1,
+  "automatedPercent": 2.4,
+  "tracker": {
+    "totalScenarios": 42,
+    "tierOneAndTwoCeiling": 15,
+    "howToUpdate": "Each week, append one entry to actuals with the number of scenarios covered by automated tests, then re-run 'npm run report:build'. Targets are a proposal, not a commitment, and should be re-baselined whenever scope changes.",
+    "actuals": [
+      {
+        "week": "2026-W38",
+        "weekStarting": "2026-09-14",
+        "automated": 1,
+        "note": "TC-003 EXO enforcement automated end-to-end and verified against the live tenant"
+      }
+    ],
+    "targets": [
+      {
+        "week": "2026-W39",
+        "weekStarting": "2026-09-21",
+        "automated": 3,
+        "note": "Complete Tier 1: TC-009 override EXO and the TC-018 EXO leg, both against policies that already exist"
+      },
+      {
+        "week": "2026-W40",
+        "weekStarting": "2026-09-28",
+        "automated": 5,
+        "note": "First SharePoint and OneDrive scenarios once file-upload automation lands: TC-001, TC-002"
+      },
+      {
+        "week": "2026-W41",
+        "weekStarting": "2026-10-05",
+        "automated": 9,
+        "note": "Override and multi-workload coverage: TC-004, TC-005, TC-006, TC-007"
+      },
+      {
+        "week": "2026-W42",
+        "weekStarting": "2026-10-12",
+        "automated": 13,
+        "note": "Remove-label and negative override coverage: TC-008, TC-010, TC-011, TC-012"
+      },
+      {
+        "week": "2026-W43",
+        "weekStarting": "2026-10-19",
+        "automated": 15,
+        "note": "Edge cases TC-019 and TC-020, which completes everything automatable without Purview portal automation"
+      }
+    ]
+  }
+}
