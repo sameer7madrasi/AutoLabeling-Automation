@@ -15,6 +15,9 @@ const NEW_MAIL_CANDIDATES: LocatorFactory[] = [
   (page) => page.getByRole('button', { name: /^new mail/i }),
   (page) => page.getByRole('menuitem', { name: /^new mail/i }),
   (page) => page.locator('[aria-label^="New mail" i]'),
+  // Classic-ribbon OWA labels the compose split button simply "New".
+  (page) => page.locator('[data-automation-type="RibbonSplitButton"][aria-label="New"]'),
+  (page) => page.getByRole('button', { name: 'New', exact: true }),
 ];
 
 const RECIPIENT_FIELD_CANDIDATES: LocatorFactory[] = [
@@ -214,9 +217,10 @@ export async function sendEmail(page: Page, options: SendEmailOptions): Promise<
 
   const recipientField = await resolveVisible(page, RECIPIENT_FIELD_CANDIDATES, 'To field');
   await recipientField.click();
-  await recipientField.fill(options.to);
-  // Outlook resolves the typed address into a recipient pill on Enter.
-  await page.waitForTimeout(1_000);
+  // Typed rather than filled: the recipient well is a contenteditable div whose
+  // autocomplete only reacts to real keystrokes. Enter then resolves the pill.
+  await recipientField.pressSequentially(options.to, { delay: 25 });
+  await page.waitForTimeout(1_500);
   await page.keyboard.press('Enter');
 
   const subjectField = await resolveVisible(page, SUBJECT_FIELD_CANDIDATES, 'Subject field');
@@ -366,6 +370,18 @@ export async function reopenMessage(page: Page, subject: string, config: TestCon
  * "Sensitivity label: EnforcementTest-Label", "EnforcementTest-Label, Sensitivity label",
  * or "Change sensitivity label. Current label EnforcementTest-Label".
  */
+/**
+ * Some builds (classic-ribbon OWA) render the label as a bare text span next to a
+ * shield icon, with no accessible name at all:
+ *   <span><i data-icon-name="ShieldBundled"></i><span>EnforcementTest-Label</span></span>
+ * The icon name is the only stable hook - the CSS classes are hashed per release.
+ */
+const LABEL_CHIP_SELECTORS = [
+  'span:has(> i[data-icon-name="ShieldBundled"])',
+  'span:has(i[data-icon-name*="Shield" i])',
+  '[data-icon-name*="Sensitivity" i]',
+];
+
 const LABEL_NAME_PATTERNS: RegExp[] = [
   /sensitivity\s*label\s*[:\-]\s*(.+)$/i,
   /current\s*(?:sensitivity\s*)?label\s*(?:is)?\s*[:\-]?\s*(.+)$/i,
@@ -404,6 +420,20 @@ export function parseLabelFromAccessibleName(rawName: string): string | null {
  */
 export async function getSensitivityLabel(page: Page): Promise<string | null> {
   const pane = await readingPane(page);
+
+  // Strategy 1: the shield-icon chip in the message header.
+  for (const selector of LABEL_CHIP_SELECTORS) {
+    const chips = pane.locator(selector);
+    const chipCount = Math.min(await chips.count().catch(() => 0), 5);
+    for (let index = 0; index < chipCount; index += 1) {
+      const chip = chips.nth(index);
+      if (!(await chip.isVisible().catch(() => false))) continue;
+      const text = (await chip.innerText().catch(() => ''))?.replace(/\s+/g, ' ').trim();
+      if (text && text.length <= 60 && !GENERIC_LABEL_WORDS.has(text.toLowerCase())) return text;
+    }
+  }
+
+  // Strategy 2: accessible names that spell the label out.
   // Ordered from the most explicit annotation to the loosest one.
   const attributeSelectors = [
     '[aria-label*="sensitivity" i]',
