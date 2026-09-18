@@ -211,14 +211,17 @@ results/, screenshots/          Run output (git-ignored except .gitkeep)
 reports/                        Weekly scenario status report pack (see below)
 ```
 
-## Weekly status report pack
+## Weekly status report packs
 
-`reports/` turns the PM's scenario sheet into a status report: five charts, a summary JSON, and a
-ready-to-send email draft.
+`reports/` turns a test sheet into a status report: charts, a summary JSON, and a ready-to-send email
+draft. Two packs share the SVG primitives in `reports/lib/svg.ts`.
 
 ```bash
-npm run report:build   # regenerates charts, weekly-report.html and data/summary.json
+npm run report:build       # auto-labeling scenarios (42 cases)
+npm run report:encryption  # encryption test suite (1,470 cases)
 ```
+
+### Auto-labeling pack (`reports/`)
 
 | Path | What it is |
 | --- | --- |
@@ -232,6 +235,24 @@ npm run report:build   # regenerates charts, weekly-report.html and data/summary
 The build asserts that section, priority and tier counts all reconcile to the total, that the tracker
 matches the number of automated scenarios, and that `email-draft.md` still quotes the live figures, so
 the narrative cannot drift from the data.
+
+### Encryption pack (`reports/encryption/`)
+
+Covers the Encrypt Only, Do Not Forward and Internal Confidential suite: 1,470 populated cases across
+three templates, three triggers, seven client pairs and ten tenant pairs.
+
+| Path | What it is |
+| --- | --- |
+| `data/test-cases.json` | Every populated case with category, client pair, tenant pair, action, status, defect theme and automation tier. |
+| `data/weekly-history.json` | Cycle-over-cycle tracker. Append one entry per execution pass; charts 03 and 04 fill the next column. |
+| `data/automation-plan.json` | Tier definitions, phases and risks behind the automation section. |
+| `charts/*.png` | Six charts: execution status, status by category, trajectory, per-feature tracker, defect concentration, automation viability. |
+| `encryption-report.html` | All six charts plus category, defect and phase tables. |
+| `email-draft.md` | Paste-ready email with a marker per chart. |
+
+The build reconciles against the source workbook before rendering: per-tab populated counts
+(210/210/210/140/140/140/210/210, since the three DNF tabs hold 70 unpopulated placeholder rows
+each), status sums, per-category pass rates, automation tier totals, and defect totals.
 
 ## Troubleshooting
 

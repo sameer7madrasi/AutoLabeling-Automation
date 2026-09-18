@@ -1,0 +1,71 @@
+{
+  "currentlyAutomated": 0,
+  "reusedFrom": "The Purview auto-labeling harness in this repo: human-assisted sign-in with reused storage state, unique-subject correlation, polling instead of fixed sleeps, PASS/FAIL console plus JSON results, and automatic failure artifacts (helpers/outlook.ts, helpers/results.ts).",
+  "scopeDecision": "Web UI for OWA and Outlook.com, plus IMAP for Gmail and Yahoo transport assertions. Desktop clients (WODC Classic and WODC New) stay manual this cycle.",
+  "tiers": {
+    "A": {
+      "label": "Runs on today's harness",
+      "surface": "OWA to OWA, recipient in Prod, SDF or Outlook.com",
+      "verdict": "Automatable now",
+      "currentStatus": "All currently passing, so the value is regression protection over a large repetitive matrix.",
+      "assertions": [
+        "Message is encrypted with the expected template (Encrypt Only / Do Not Forward / Internal Confidential)",
+        "Forward is disabled on Do Not Forward mail - guards a security control",
+        "OME wrapper present where expected",
+        "All four attachments arrive with their original file names"
+      ]
+    },
+    "B": {
+      "label": "Web plus IMAP",
+      "surface": "OWA to OWA, recipient Gmail or Yahoo",
+      "verdict": "Automatable with an IMAP verifier",
+      "currentStatus": "Holds 58 of the 194 failures; the two dominant defect classes are MIME-level and therefore checkable without a browser.",
+      "assertions": [
+        "Attachment file names preserved (covers the random-filename and missing-filename defects)",
+        "Attachment count and MIME types intact",
+        "OME wrapper present",
+        "Encryption applied end to end"
+      ],
+      "staysManual": "Attachment preview rendering inside Gmail and Yahoo web UIs."
+    },
+    "C": {
+      "label": "Desktop, stays manual",
+      "surface": "Any pair with WODC Classic or WODC New on either side",
+      "verdict": "Out of scope for web automation",
+      "currentStatus": "Both severe defects this cycle were found only here, so automation reduces matrix cost without replacing the desktop pass.",
+      "notes": "WODC New is WebView2-based, so attaching over CDP is plausible but unproven. WODC Classic needs Windows UI automation (WinAppDriver or similar), which is a different toolchain and a separate decision."
+    }
+  },
+  "phases": [
+    {
+      "id": 1,
+      "name": "Harness extension",
+      "work": "Add encryption triggers (label, subject keywords ETRENCRYPTTEST / ETRDONOTFORWARDTEST / ETRINTERNALCONFIDENTIALTEST, and Options / default template), Reply / Reply All / Forward actions, the docx+pdf+xlsx+txt attachment fixture set, and assertion helpers for encryption applied, OME wrapper, forward-disabled and attachment names.",
+      "unlocks": "First end-to-end encryption scenario, same shape as the auto-labeling test."
+    },
+    {
+      "id": 2,
+      "name": "Tier A matrix runner",
+      "work": "One data-driven spec that iterates the combinations straight out of test-cases.json, so the matrix stays in data rather than in code.",
+      "unlocks": "126 cases"
+    },
+    {
+      "id": 3,
+      "name": "IMAP verifier",
+      "work": "Small IMAP module using app passwords to read the delivered message and assert transport-level properties for consumer recipients.",
+      "unlocks": "84 cases, transport-level assertions only"
+    },
+    {
+      "id": 4,
+      "name": "Reporting loop",
+      "work": "Append each run's outcome to weekly-history.json so the trajectory and per-feature tracker update from real runs instead of hand edits.",
+      "unlocks": "Self-maintaining weekly report"
+    }
+  ],
+  "risks": [
+    "Consumer webmail actively resists browser automation, which is exactly why Gmail and Yahoo checks go over IMAP rather than through the UI.",
+    "Sessions expire; the harness falls back to human-assisted sign-in rather than storing credentials.",
+    "Attachment preview is inherently visual. Screenshot comparison is the only realistic automated form, and it is deferred.",
+    "The encryption templates and ETR subject keywords must stay stable, since the tests assert against them rather than creating them."
+  ]
+}

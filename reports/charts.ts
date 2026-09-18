@@ -1,9 +1,13 @@
 /**
- * Chart and summary builders for the weekly PM report.
+ * Chart and summary builders for the weekly auto-labeling PM report.
  *
  * Every number rendered here is derived from reports/data/*.json - nothing is
  * hardcoded - so the email narrative cannot drift from the scenario data.
  */
+
+import { COLORS, FONT, legend, rect, svgOpen, text } from './lib/svg';
+
+export { COLORS } from './lib/svg';
 
 export interface TestCase {
   id: string;
@@ -84,20 +88,6 @@ const STATUS_PASS = 'Pass';
 const STATUS_TBC = 'TBC';
 const STATUS_CLARIFICATION = 'Clarification Needed';
 
-export const COLORS = {
-  pass: '#107c10',
-  tbc: '#f2a93b',
-  clarification: '#c50f1f',
-  shipped: '#0b5c0b',
-  tier1: '#4caf50',
-  tier2: '#0f6cbd',
-  tier3: '#8661c5',
-  tier4: '#8a8886',
-  ink: '#242424',
-  muted: '#616161',
-  grid: '#e1dfdd',
-} as const;
-
 export function buildSummary(data: TestCaseFile, history: HistoryFile): Summary {
   const cases = data.cases;
   const count = (predicate: (c: TestCase) => boolean) => cases.filter(predicate).length;
@@ -157,44 +147,6 @@ export function buildSummary(data: TestCaseFile, history: HistoryFile): Summary 
     automatedPercent: Math.round((automated.length / cases.length) * 1000) / 10,
     tracker: history,
   };
-}
-
-// --- SVG helpers -------------------------------------------------------------
-
-const FONT = "'Segoe UI', system-ui, -apple-system, sans-serif";
-
-function svgOpen(width: number, height: number): string {
-  return `<svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg" font-family="${FONT}">`;
-}
-
-function text(
-  x: number,
-  y: number,
-  content: string,
-  options: { size?: number; weight?: number; fill?: string; anchor?: string } = {},
-): string {
-  const { size = 12, weight = 400, fill = COLORS.ink, anchor = 'start' } = options;
-  return `<text x="${x}" y="${y}" font-size="${size}" font-weight="${weight}" fill="${fill}" text-anchor="${anchor}">${escapeXml(content)}</text>`;
-}
-
-function rect(x: number, y: number, w: number, h: number, fill: string, radius = 2): string {
-  return `<rect x="${x}" y="${y}" width="${Math.max(w, 0)}" height="${h}" rx="${radius}" fill="${fill}" />`;
-}
-
-function escapeXml(value: string): string {
-  return value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-}
-
-function legend(x: number, y: number, entries: { color: string; label: string }[]): string {
-  let cursor = x;
-  return entries
-    .map((entry) => {
-      const block = `${rect(cursor, y - 9, 10, 10, entry.color, 2)}${text(cursor + 15, y, entry.label, { size: 11, fill: COLORS.muted })}`;
-      // Advance by a deliberately generous estimate of the rendered label width.
-      cursor += 30 + entry.label.length * 6.6;
-      return block;
-    })
-    .join('');
 }
 
 // --- Chart 1: onboarding funnel ---------------------------------------------

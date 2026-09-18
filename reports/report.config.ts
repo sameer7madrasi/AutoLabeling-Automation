@@ -4,6 +4,8 @@ import { defineConfig } from '@playwright/test';
 // no tenant credentials, no .env, no network access required.
 export default defineConfig({
   testDir: '.',
+  // The encryption pack has its own config; keep the two builds independent.
+  testIgnore: 'encryption/**',
   workers: 1,
   retries: 0,
   timeout: 120_000,
