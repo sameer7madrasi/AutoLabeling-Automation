@@ -1,125 +1,133 @@
 {
   "totals": {
-    "populated": 1470,
+    "inScope": 1140,
     "pass": 946,
     "fail": 194,
-    "notApplicable": 330,
-    "executed": 1140,
-    "passRate": 83
+    "passRate": 83,
+    "plannedTcIds": 1680
   },
-  "placeholderRows": {
-    "count": 210,
-    "tabs": [
-      "DNF-Label",
-      "DNF-Subject",
-      "DNF-Default template"
-    ],
-    "detail": "TC 141-210 (spreadsheet rows 157-232) in each DNF tab hold only a TC id plus a stray \"NA\" in the OME Wrapper column; Scenario, Client, Tenant, Action, verification and Status are all empty. The Details tab lists Do Not Forward with Reply and Reply All only, so these were never in scope."
+  "scope": {
+    "basis": "Applicable cases only: every row carrying a Pass or Fail result.",
+    "excludedNotApplicable": 330,
+    "excludedPlaceholderRows": 210,
+    "rationale": "Rows marked NA are placeholders for combinations a feature does not support, so they are never executed and would only dilute the denominator. The placeholder rows are unpopulated TC ids in the DNF tabs (TC 141-210)."
+  },
+  "byTemplate": {
+    "Encrypt Only": {
+      "inScope": 488,
+      "pass": 384,
+      "fail": 104,
+      "passRate": 78.7
+    },
+    "Do Not Forward": {
+      "inScope": 328,
+      "pass": 244,
+      "fail": 84,
+      "passRate": 74.4
+    },
+    "Internal Confidential": {
+      "inScope": 324,
+      "pass": 318,
+      "fail": 6,
+      "passRate": 98.1
+    }
   },
   "categories": [
     {
       "category": "DNF-Subject",
       "template": "Do Not Forward",
       "trigger": "Subject keyword",
-      "plannedTcIds": 210,
-      "populated": 140,
-      "blankStatusRows": 70,
+      "inScope": 108,
       "pass": 80,
       "fail": 28,
-      "notApplicable": 32,
-      "executed": 108,
-      "passRate": 74.1
+      "passRate": 74.1,
+      "excludedNotApplicable": 32,
+      "excludedPlaceholderRows": 70,
+      "plannedTcIds": 210
     },
     {
       "category": "DNF-Default template",
       "template": "Do Not Forward",
       "trigger": "Options / default template",
-      "plannedTcIds": 210,
-      "populated": 140,
-      "blankStatusRows": 70,
+      "inScope": 108,
       "pass": 80,
       "fail": 28,
-      "notApplicable": 32,
-      "executed": 108,
-      "passRate": 74.1
+      "passRate": 74.1,
+      "excludedNotApplicable": 32,
+      "excludedPlaceholderRows": 70,
+      "plannedTcIds": 210
     },
     {
       "category": "DNF-Label",
       "template": "Do Not Forward",
       "trigger": "Label",
-      "plannedTcIds": 210,
-      "populated": 140,
-      "blankStatusRows": 70,
+      "inScope": 112,
       "pass": 84,
       "fail": 28,
-      "notApplicable": 28,
-      "executed": 112,
-      "passRate": 75
+      "passRate": 75,
+      "excludedNotApplicable": 28,
+      "excludedPlaceholderRows": 70,
+      "plannedTcIds": 210
     },
     {
       "category": "EO-Options",
       "template": "Encrypt Only",
       "trigger": "Options / default template",
-      "plannedTcIds": 210,
-      "populated": 210,
-      "blankStatusRows": 0,
+      "inScope": 162,
       "pass": 126,
       "fail": 36,
-      "notApplicable": 48,
-      "executed": 162,
-      "passRate": 77.8
+      "passRate": 77.8,
+      "excludedNotApplicable": 48,
+      "excludedPlaceholderRows": 0,
+      "plannedTcIds": 210
     },
     {
       "category": "EO-Label",
       "template": "Encrypt Only",
       "trigger": "Label",
-      "plannedTcIds": 210,
-      "populated": 210,
-      "blankStatusRows": 0,
+      "inScope": 162,
       "pass": 128,
       "fail": 34,
-      "notApplicable": 48,
-      "executed": 162,
-      "passRate": 79
+      "passRate": 79,
+      "excludedNotApplicable": 48,
+      "excludedPlaceholderRows": 0,
+      "plannedTcIds": 210
     },
     {
       "category": "EO-Subject",
       "template": "Encrypt Only",
       "trigger": "Subject keyword",
-      "plannedTcIds": 210,
-      "populated": 210,
-      "blankStatusRows": 0,
+      "inScope": 164,
       "pass": 130,
       "fail": 34,
-      "notApplicable": 46,
-      "executed": 164,
-      "passRate": 79.3
+      "passRate": 79.3,
+      "excludedNotApplicable": 46,
+      "excludedPlaceholderRows": 0,
+      "plannedTcIds": 210
     },
     {
       "category": "IC-Label",
       "template": "Internal Confidential",
       "trigger": "Label",
-      "plannedTcIds": 210,
-      "populated": 210,
-      "blankStatusRows": 0,
+      "inScope": 162,
       "pass": 159,
       "fail": 3,
-      "notApplicable": 48,
-      "executed": 162,
-      "passRate": 98.1
+      "passRate": 98.1,
+      "excludedNotApplicable": 48,
+      "excludedPlaceholderRows": 0,
+      "plannedTcIds": 210
     },
     {
       "category": "IC-Subject",
       "template": "Internal Confidential",
       "trigger": "Subject keyword",
-      "plannedTcIds": 210,
-      "populated": 210,
-      "blankStatusRows": 0,
+      "inScope": 162,
       "pass": 159,
       "fail": 3,
-      "notApplicable": 48,
-      "executed": 162,
-      "passRate": 98.1
+      "passRate": 98.1,
+      "excludedNotApplicable": 48,
+      "excludedPlaceholderRows": 0,
+      "plannedTcIds": 210
     }
   ],
   "defects": [
@@ -160,42 +168,44 @@
       "label": "Runs on today's harness",
       "surface": "OWA to OWA, recipient in Prod, SDF or Outlook.com",
       "count": 126,
-      "percent": 8.6
+      "percent": 11.1
     },
     {
       "tier": "B",
       "label": "Web plus IMAP",
       "surface": "OWA to OWA, recipient Gmail or Yahoo",
       "count": 84,
-      "percent": 5.7
+      "percent": 7.4
     },
     {
       "tier": "C",
       "label": "Desktop, stays manual",
       "surface": "Any pair with WODC Classic or WODC New on either side",
-      "count": 1260,
-      "percent": 85.7
+      "count": 930,
+      "percent": 81.6
     }
   ],
   "automatableNow": 210,
-  "automatablePercent": 14.3,
+  "automatablePercent": 18.4,
   "history": {
-    "howToUpdate": "Append one entry to weeks after each execution cycle, then run 'npm run report:encryption'. Keep week numbers contiguous; the trajectory and per-feature tracker charts render placeholderWeeks empty columns ahead of the latest entry so the growth is visible.",
+    "howToUpdate": "Append one entry to weeks after each execution cycle, then run 'npm run report:encryption'. Counts cover applicable cases only (Pass or Fail); combinations a feature does not support are out of scope and never counted. The trajectory and per-feature tracker render placeholderWeeks empty columns ahead of the latest entry so the growth is visible.",
     "placeholderWeeks": 4,
     "weeks": [
       {
         "week": 0,
         "label": "W0",
         "cycleEnding": "2026-09-18",
-        "populated": 1470,
-        "executed": 1140,
+        "inScope": 1140,
         "pass": 946,
         "fail": 194,
-        "notApplicable": 330,
         "passRate": 83,
-        "coverage": 77.6,
         "automatedCases": 0,
         "openDefectClasses": 5,
+        "byTemplate": {
+          "Encrypt Only": 78.7,
+          "Do Not Forward": 74.4,
+          "Internal Confidential": 98.1
+        },
         "byCategory": {
           "EO-Label": 79,
           "EO-Subject": 79.3,

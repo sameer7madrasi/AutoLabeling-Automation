@@ -218,7 +218,7 @@ draft. Two packs share the SVG primitives in `reports/lib/svg.ts`.
 
 ```bash
 npm run report:build       # auto-labeling scenarios (42 cases)
-npm run report:encryption  # encryption test suite (1,470 cases)
+npm run report:encryption  # encryption test suite (1,140 applicable cases)
 ```
 
 ### Auto-labeling pack (`reports/`)
@@ -238,21 +238,23 @@ the narrative cannot drift from the data.
 
 ### Encryption pack (`reports/encryption/`)
 
-Covers the Encrypt Only, Do Not Forward and Internal Confidential suite: 1,470 populated cases across
-three templates, three triggers, seven client pairs and ten tenant pairs.
+Covers the Encrypt Only, Do Not Forward and Internal Confidential suite: 1,140 applicable cases across
+three templates, three triggers, seven client pairs and ten tenant pairs. Rows marked NA in the sheet
+are combinations a feature does not support, so they are never executed and stay out of scope.
 
 | Path | What it is |
 | --- | --- |
-| `data/test-cases.json` | Every populated case with category, client pair, tenant pair, action, status, defect theme and automation tier. |
+| `data/test-cases.json` | Every applicable case with category, client pair, tenant pair, action, status, defect theme and automation tier. |
 | `data/weekly-history.json` | Cycle-over-cycle tracker. Append one entry per execution pass; charts 03 and 04 fill the next column. |
 | `data/automation-plan.json` | Tier definitions, phases and risks behind the automation section. |
 | `charts/*.png` | Six charts: execution status, status by category, trajectory, per-feature tracker, defect concentration, automation viability. |
 | `encryption-report.html` | All six charts plus category, defect and phase tables. |
 | `email-draft.md` | Paste-ready email with a marker per chart. |
 
-The build reconciles against the source workbook before rendering: per-tab populated counts
-(210/210/210/140/140/140/210/210, since the three DNF tabs hold 70 unpopulated placeholder rows
-each), status sums, per-category pass rates, automation tier totals, and defect totals.
+The build reconciles against the source workbook before rendering: per-tab applicable counts
+(162/164/162/112/108/108/162/162), scope plus exclusions adding back to the 1,680 planned TC ids
+(330 unsupported combinations and 210 unpopulated DNF placeholder rows), per-category and per-template
+pass rates, automation tier totals, and defect totals.
 
 ## Troubleshooting
 

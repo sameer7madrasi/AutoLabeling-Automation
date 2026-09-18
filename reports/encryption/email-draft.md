@@ -30,31 +30,35 @@ clients, and across Prod, SDF, Gmail, Yahoo, and Hotmail tenant and recipient co
 
 [INSERT reports/encryption/charts/01-execution-status.png]
 
-The suite holds **1,470 populated test cases**: 1,140 executed (946 pass, 194 fail) and 330 not
-applicable by design. That gives a pass rate of **83.0%** on executed cases.
+The suite holds **1,140 applicable test cases**, every one of them executed this cycle: 946 pass
+and 194 fail, a pass rate of **83.0%**.
 
-One bookkeeping note, so the totals reconcile against the workbook. The three DNF tabs each carry 70
-unpopulated placeholder rows (TC 141-210, spreadsheet rows 157-232): they hold a TC ID and nothing
-else, no scenario, client, tenant, action, verification or status. That is consistent with the
-Details tab, which lists Do Not Forward with Reply and Reply All only, since DNF blocks forwarding.
-So the planned ID range is 1,680 while the real, populated suite is 1,470. Our numbers below use
-1,470 throughout. Worth a decision on your side: either retire those stub rows, or repurpose them as
-explicit negative cases that assert forwarding is blocked, which is exactly where we found a defect
-this cycle.
+Two notes on scope, so the numbers reconcile against the workbook. First, we report applicable cases
+only. Rows marked NA are placeholders for combinations a feature does not support, so they are never
+executed; counting them would only dilute the denominator without telling you anything. That excludes
+330 rows this cycle. Second, the three DNF tabs each carry 70 unpopulated placeholder rows (TC
+141-210, spreadsheet rows 157-232) holding a TC ID and nothing else - no scenario, client, tenant,
+action, verification or status. That is consistent with the Details tab, which lists Do Not Forward
+with Reply and Reply All only, since DNF blocks forwarding. So 1,680 planned TC IDs reconcile to
+1,140 applicable cases plus 330 unsupported plus 210 placeholders. Worth a decision on your side:
+either retire those stub rows, or repurpose them as explicit negative cases that assert forwarding is
+blocked, which is exactly where we found a defect this cycle.
 
 [INSERT reports/encryption/charts/02-status-by-category.png]
 
-| Protection category | Cases | Pass | Fail | Not applicable | Pass rate |
-| --- | --- | --- | --- | --- | --- |
-| DNF-Subject | 140 | 80 | 28 | 32 | 74.1% |
-| DNF-Default template | 140 | 80 | 28 | 32 | 74.1% |
-| DNF-Label | 140 | 84 | 28 | 28 | 75.0% |
-| EO-Options | 210 | 126 | 36 | 48 | 77.8% |
-| EO-Label | 210 | 128 | 34 | 48 | 79.0% |
-| EO-Subject | 210 | 130 | 34 | 46 | 79.3% |
-| IC-Label | 210 | 159 | 3 | 48 | 98.1% |
-| IC-Subject | 210 | 159 | 3 | 48 | 98.1% |
-| **Total** | **1,470** | **946** | **194** | **330** | **83.0%** |
+| Protection category | Applicable cases | Pass | Fail | Pass rate |
+| --- | --- | --- | --- | --- |
+| DNF-Subject | 108 | 80 | 28 | 74.1% |
+| DNF-Default template | 108 | 80 | 28 | 74.1% |
+| DNF-Label | 112 | 84 | 28 | 75.0% |
+| EO-Options | 162 | 126 | 36 | 77.8% |
+| EO-Label | 162 | 128 | 34 | 79.0% |
+| EO-Subject | 164 | 130 | 34 | 79.3% |
+| IC-Label | 162 | 159 | 3 | 98.1% |
+| IC-Subject | 162 | 159 | 3 | 98.1% |
+| **Total** | **1,140** | **946** | **194** | **83.0%** |
+
+Rolled up by template: Internal Confidential 98.1%, Encrypt Only 78.7%, Do Not Forward 74.4%.
 
 Internal Confidential is effectively clean at 98.1%. Do Not Forward trails the set at 74-75%, and
 Encrypt Only sits just under 80%. The pattern is consistent across all three trigger types, which
@@ -64,9 +68,10 @@ points at the template behaviour rather than at how the template is applied.
 
 [INSERT reports/encryption/charts/03-trajectory.png]
 
-We are tracking two lines from now on: pass rate on executed cases, and execution coverage (executed
-divided by populated). W0 is 83.0% pass at 77.6% coverage. Each cycle appends one point, so by W2 we
-will be able to say whether fixes are landing faster than regressions appear.
+We are tracking pass rate from now on, overall and per template. W0 is 83.0% overall, with Internal
+Confidential at 98.1%, Encrypt Only at 78.7% and Do Not Forward at 74.4%. Each cycle appends one
+point, so by W2 we will be able to say whether fixes are landing faster than regressions appear, and
+which template is moving.
 
 [INSERT reports/encryption/charts/04-feature-tracker.png]
 
@@ -116,9 +121,9 @@ the two dominant defects are MIME-level: "random file name" and "no file name di
 attachment metadata, checkable without a browser. Preview rendering inside Gmail and Yahoo stays
 manual.
 
-That makes **210 cases (14.3%)** reachable with web plus IMAP automation.
+That makes **210 cases (18.4%)** reachable with web plus IMAP automation.
 
-**Tier C - stays manual: 1,260 cases (85.7%).** Any pair with WODC Classic or WODC New on either
+**Tier C - stays manual: 930 cases (81.6%).** Any pair with WODC Classic or WODC New on either
 side. WODC New is WebView2-based so attaching a browser automation session is plausible but unproven;
 WODC Classic needs Windows UI automation, which is a different toolchain and a separate decision. We
 want to be straight about the implication: both high-severity defects this cycle were found in Tier C,

@@ -18,17 +18,23 @@ const HTML_PATH = path.join(REPORT_DIR, 'encryption-report.html');
 const SUMMARY_PATH = path.join(DATA_DIR, 'summary.json');
 const EMAIL_PATH = path.join(REPORT_DIR, 'email-draft.md');
 
-/** Counts of status-bearing rows per workbook tab, as extracted from the sheet. */
-const EXPECTED_POPULATED: Record<string, number> = {
-  'EO-Label': 210,
-  'EO-Subject': 210,
-  'EO-Options': 210,
-  'DNF-Label': 140,
-  'DNF-Subject': 140,
-  'DNF-Default template': 140,
-  'IC-Label': 210,
-  'IC-Subject': 210,
+/**
+ * Applicable (Pass or Fail) rows per workbook tab. The remainder of each tab's
+ * 210 TC ids are unsupported combinations marked NA, plus - in the DNF tabs -
+ * 70 unpopulated placeholder rows.
+ */
+const EXPECTED_IN_SCOPE: Record<string, number> = {
+  'EO-Label': 162,
+  'EO-Subject': 164,
+  'EO-Options': 162,
+  'DNF-Label': 112,
+  'DNF-Subject': 108,
+  'DNF-Default template': 108,
+  'IC-Label': 162,
+  'IC-Subject': 162,
 };
+
+const PLANNED_TC_IDS_PER_TAB = 210;
 
 function readJson<T>(file: string): T {
   return JSON.parse(fs.readFileSync(file, 'utf8')) as T;
@@ -66,59 +72,73 @@ function reconcileWithWorkbook(
   summary: EncryptionSummary,
   history: WeeklyHistory,
 ): void {
-  const { populated, pass, fail, notApplicable, executed, passRate } = data.totals;
+  const { inScope, pass, fail, passRate, plannedTcIds } = data.totals;
 
-  expect(data.cases, 'one record per populated case').toHaveLength(populated);
-  expect(pass + fail + notApplicable, 'statuses cover every populated case').toBe(populated);
-  expect(executed, 'executed = pass + fail').toBe(pass + fail);
-  expect(passRate, 'pass rate is computed over executed cases').toBe(
-    Math.round((pass / executed) * 1000) / 10,
+  expect(data.cases, 'one record per applicable case').toHaveLength(inScope);
+  expect(pass + fail, 'every applicable case is a pass or a fail').toBe(inScope);
+  expect(passRate, 'pass rate is computed over applicable cases').toBe(
+    Math.round((pass / inScope) * 1000) / 10,
   );
+  expect(
+    data.cases.filter((entry) => entry.status !== 'Pass' && entry.status !== 'Fail'),
+    'no not-applicable rows leak into scope',
+  ).toHaveLength(0);
 
-  // Per-tab populated counts: the three DNF tabs legitimately hold 140, not 210.
-  for (const [category, expectedCount] of Object.entries(EXPECTED_POPULATED)) {
+  for (const [category, expectedCount] of Object.entries(EXPECTED_IN_SCOPE)) {
     const meta = data.categories.find((entry) => entry.category === category);
     expect(meta, `${category} present`).toBeDefined();
-    expect(meta?.populated, `${category} populated rows`).toBe(expectedCount);
-    expect(meta?.plannedTcIds, `${category} planned TC ids`).toBe(210);
+    expect(meta?.inScope, `${category} applicable rows`).toBe(expectedCount);
+    expect(meta?.plannedTcIds, `${category} planned TC ids`).toBe(PLANNED_TC_IDS_PER_TAB);
+    expect((meta?.pass ?? 0) + (meta?.fail ?? 0), `${category} statuses sum to applicable`).toBe(
+      expectedCount,
+    );
     expect(
-      (meta?.pass ?? 0) + (meta?.fail ?? 0) + (meta?.notApplicable ?? 0),
-      `${category} statuses sum to populated`,
-    ).toBe(expectedCount);
+      (meta?.inScope ?? 0) + (meta?.excludedNotApplicable ?? 0) + (meta?.excludedPlaceholderRows ?? 0),
+      `${category} scope plus exclusions equal its planned TC ids`,
+    ).toBe(PLANNED_TC_IDS_PER_TAB);
     expect(
       data.cases.filter((entry) => entry.category === category),
       `${category} case records`,
     ).toHaveLength(expectedCount);
   }
 
-  const placeholders = Object.values(EXPECTED_POPULATED).reduce(
-    (sum, count) => sum + (210 - count),
-    0,
+  // Scope plus documented exclusions must still account for the planned matrix.
+  expect(
+    inScope + data.scope.excludedNotApplicable + data.scope.excludedPlaceholderRows,
+    'scope plus exclusions equal the planned TC ids',
+  ).toBe(plannedTcIds);
+  expect(plannedTcIds, 'planned matrix is 8 tabs of 210 ids').toBe(
+    Object.keys(EXPECTED_IN_SCOPE).length * PLANNED_TC_IDS_PER_TAB,
   );
-  expect(data.placeholderRows.count, 'placeholder rows accounted for').toBe(placeholders);
-  expect(populated + placeholders, 'populated plus placeholders equal the planned matrix').toBe(1680);
+
+  // Per-template aggregates used by the trajectory chart.
+  for (const [template, meta] of Object.entries(data.byTemplate)) {
+    const cases = data.cases.filter((entry) => entry.template === template);
+    expect(cases, `${template} case records`).toHaveLength(meta.inScope);
+    expect(cases.filter((entry) => entry.status === 'Pass'), `${template} pass`).toHaveLength(meta.pass);
+    expect(Math.round((meta.pass / meta.inScope) * 1000) / 10, `${template} pass rate`).toBe(
+      meta.passRate,
+    );
+  }
+  expect(
+    Object.values(data.byTemplate).reduce((sum, meta) => sum + meta.inScope, 0),
+    'templates cover every applicable case',
+  ).toBe(inScope);
 
   // Per-category pass rates must match what the category metadata claims.
   for (const meta of data.categories) {
     const cases = data.cases.filter((entry) => entry.category === meta.category);
-    const recomputed = {
-      pass: cases.filter((entry) => entry.status === 'Pass').length,
-      fail: cases.filter((entry) => entry.status === 'Fail').length,
-      na: cases.filter((entry) => entry.status === 'NA').length,
-    };
-    expect(recomputed.pass, `${meta.category} pass`).toBe(meta.pass);
-    expect(recomputed.fail, `${meta.category} fail`).toBe(meta.fail);
-    expect(recomputed.na, `${meta.category} not applicable`).toBe(meta.notApplicable);
-    expect(
-      Math.round((meta.pass / meta.executed) * 1000) / 10,
-      `${meta.category} pass rate`,
-    ).toBe(meta.passRate);
+    expect(cases.filter((entry) => entry.status === 'Pass'), `${meta.category} pass`).toHaveLength(meta.pass);
+    expect(cases.filter((entry) => entry.status === 'Fail'), `${meta.category} fail`).toHaveLength(meta.fail);
+    expect(Math.round((meta.pass / meta.inScope) * 1000) / 10, `${meta.category} pass rate`).toBe(
+      meta.passRate,
+    );
   }
 
   expect(
     summary.tiers.reduce((sum, tier) => sum + tier.count, 0),
-    'automation tiers cover every case',
-  ).toBe(populated);
+    'automation tiers cover every applicable case',
+  ).toBe(inScope);
   expect(
     summary.defects.reduce((sum, defect) => sum + defect.count, 0),
     'defect classes cover every failure',
@@ -129,12 +149,13 @@ function reconcileWithWorkbook(
   expect(week0?.pass, 'baseline pass matches the sheet').toBe(pass);
   expect(week0?.fail, 'baseline fail matches the sheet').toBe(fail);
   expect(week0?.passRate, 'baseline pass rate matches the sheet').toBe(passRate);
-  expect(week0?.coverage, 'baseline coverage matches the sheet').toBe(
-    Math.round((executed / populated) * 1000) / 10,
-  );
+  expect(week0?.inScope, 'baseline scope matches the sheet').toBe(inScope);
   expect(week0?.openDefectClasses, 'baseline defect classes match').toBe(summary.defects.length);
   for (const meta of data.categories) {
     expect(week0?.byCategory[meta.category], `${meta.category} baseline pass rate`).toBe(meta.passRate);
+  }
+  for (const [template, meta] of Object.entries(data.byTemplate)) {
+    expect(week0?.byTemplate[template], `${template} baseline pass rate`).toBe(meta.passRate);
   }
 }
 
@@ -146,8 +167,8 @@ function assertEmailDraftMatchesData(summary: EncryptionSummary): void {
   }
   const draft = fs.readFileSync(EMAIL_PATH, 'utf8');
   const required = [
-    `${summary.totals.populated.toLocaleString()}`,
-    `${summary.totals.executed.toLocaleString()} executed`,
+    `${summary.totals.inScope.toLocaleString()} applicable`,
+    `${summary.totals.pass.toLocaleString()} pass`,
     `${summary.totals.passRate.toFixed(1)}%`,
     `${summary.totals.fail} failures`,
     `${summary.automatableNow} cases`,
@@ -163,16 +184,15 @@ function printSummary(summary: EncryptionSummary, slugs: string[]): void {
     '='.repeat(60),
     'ENCRYPTION REPORT BUILD',
     '='.repeat(60),
-    `Populated cases:   ${summary.totals.populated}`,
-    `Executed:          ${summary.totals.executed}`,
-    `Pass / Fail / NA:  ${summary.totals.pass} / ${summary.totals.fail} / ${summary.totals.notApplicable}`,
+    `Applicable cases:  ${summary.totals.inScope}`,
+    `Pass / Fail:       ${summary.totals.pass} / ${summary.totals.fail}`,
     `Pass rate:         ${summary.totals.passRate.toFixed(1)}%`,
-    `Placeholder rows:  ${summary.placeholderRows.count} (${summary.placeholderRows.tabs.join(', ')})`,
+    `Excluded:          ${summary.scope.excludedNotApplicable} not applicable, ${summary.scope.excludedPlaceholderRows} placeholder rows`,
     '',
     'Categories (worst first):',
     ...summary.categories.map(
       (category) =>
-        `  ${category.category.padEnd(22)} ${String(category.populated).padStart(4)} cases  ${String(category.passRate).padStart(5)}%`,
+        `  ${category.category.padEnd(22)} ${String(category.inScope).padStart(4)} cases  ${category.passRate.toFixed(1).padStart(5)}%`,
     ),
     '',
     'Defect classes:',

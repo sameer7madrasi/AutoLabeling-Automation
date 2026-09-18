@@ -26,12 +26,18 @@ export interface CategoryMeta {
   template: string;
   trigger: string;
   plannedTcIds: number;
-  populated: number;
-  blankStatusRows: number;
+  inScope: number;
   pass: number;
   fail: number;
-  notApplicable: number;
-  executed: number;
+  passRate: number;
+  excludedNotApplicable: number;
+  excludedPlaceholderRows: number;
+}
+
+export interface TemplateMeta {
+  inScope: number;
+  pass: number;
+  fail: number;
   passRate: number;
 }
 
@@ -39,7 +45,17 @@ export interface EncryptionData {
   source: string;
   extractedAt: string;
   cycle: string;
-  placeholderRows: { count: number; tabs: string[]; detail: string };
+  /**
+   * The report counts applicable cases only. Combinations a feature does not
+   * support are marked NA in the sheet, are never executed, and would only
+   * dilute the denominator, so they are out of scope here.
+   */
+  scope: {
+    basis: string;
+    excludedNotApplicable: number;
+    excludedPlaceholderRows: number;
+    rationale: string;
+  };
   dimensions: {
     templates: string[];
     triggers: string[];
@@ -48,13 +64,13 @@ export interface EncryptionData {
     recipientGroups: Record<string, string[]>;
   };
   totals: {
-    populated: number;
+    inScope: number;
     pass: number;
     fail: number;
-    notApplicable: number;
-    executed: number;
     passRate: number;
+    plannedTcIds: number;
   };
+  byTemplate: Record<string, TemplateMeta>;
   categories: CategoryMeta[];
   cases: EncryptionCase[];
 }
@@ -63,15 +79,13 @@ export interface WeekEntry {
   week: number;
   label: string;
   cycleEnding: string;
-  populated: number;
-  executed: number;
+  inScope: number;
   pass: number;
   fail: number;
-  notApplicable: number;
   passRate: number;
-  coverage: number;
   automatedCases: number;
   openDefectClasses: number;
+  byTemplate: Record<string, number>;
   byCategory: Record<string, number>;
   note: string;
 }
@@ -118,7 +132,8 @@ export interface TierSummary {
 
 export interface EncryptionSummary {
   totals: EncryptionData['totals'];
-  placeholderRows: EncryptionData['placeholderRows'];
+  scope: EncryptionData['scope'];
+  byTemplate: Record<string, TemplateMeta>;
   categories: CategoryMeta[];
   defects: DefectSummary[];
   tiers: TierSummary[];
@@ -183,7 +198,7 @@ export function buildSummary(
       label: meta.label,
       surface: meta.surface,
       count,
-      percent: Math.round((count / data.totals.populated) * 1000) / 10,
+      percent: Math.round((count / data.totals.inScope) * 1000) / 10,
     };
   });
 
@@ -193,12 +208,13 @@ export function buildSummary(
 
   return {
     totals: data.totals,
-    placeholderRows: data.placeholderRows,
+    scope: data.scope,
+    byTemplate: data.byTemplate,
     categories: [...data.categories].sort((a, b) => a.passRate - b.passRate),
     defects,
     tiers,
     automatableNow,
-    automatablePercent: Math.round((automatableNow / data.totals.populated) * 1000) / 10,
+    automatablePercent: Math.round((automatableNow / data.totals.inScope) * 1000) / 10,
     history,
     plan,
   };
@@ -233,34 +249,33 @@ function donutSlice(
 
 export function renderExecutionStatusChart(summary: EncryptionSummary): string {
   const width = 650;
-  const height = 300;
-  const { populated, pass, fail, notApplicable, executed, passRate } = summary.totals;
+  const height = 302;
+  const { inScope, pass, fail, passRate } = summary.totals;
   const slices = [
     { label: 'Pass', value: pass, color: COLORS.pass },
     { label: 'Fail', value: fail, color: COLORS.fail },
-    { label: 'Not applicable', value: notApplicable, color: COLORS.notApplicable },
   ];
 
   const cx = 148;
-  const cy = 168;
+  const cy = 172;
   let cursor = 0;
   const arcs = slices
     .map((slice) => {
       const start = cursor;
-      cursor += slice.value / populated;
+      cursor += slice.value / inScope;
       return donutSlice(cx, cy, 92, 54, start, cursor, slice.color);
     })
     .join('');
 
   const rows = slices
     .map((slice, index) => {
-      const y = 126 + index * 34;
-      const percent = ((slice.value / populated) * 100).toFixed(1);
+      const y = 142 + index * 36;
+      const percent = ((slice.value / inScope) * 100).toFixed(1);
       return [
         rect(292, y - 11, 12, 12, slice.color, 2),
-        text(312, y, slice.label, { size: 12.5, weight: 600 }),
+        text(312, y, slice.label, { size: 13, weight: 600 }),
         text(width, y, `${slice.value.toLocaleString()}  (${percent}%)`, {
-          size: 12.5,
+          size: 13,
           weight: 600,
           anchor: 'end',
           fill: COLORS.muted,
@@ -269,27 +284,39 @@ export function renderExecutionStatusChart(summary: EncryptionSummary): string {
     })
     .join('');
 
+  const templateRows = Object.entries(summary.byTemplate)
+    .map(([template, meta], index) => {
+      const y = 246 + index * 18;
+      return [
+        text(292, y, template, { size: 11, fill: COLORS.muted }),
+        text(width, y, `${meta.passRate.toFixed(1)}%`, {
+          size: 11,
+          weight: 600,
+          anchor: 'end',
+          fill: meta.passRate >= 90 ? COLORS.pass : COLORS.ink,
+        }),
+      ].join('');
+    })
+    .join('');
+
   return [
     svgOpen(width, height),
     rect(0, 0, width, height, '#ffffff', 0),
-    text(0, 20, 'Execution status - all figures over the same 1,470 cases', { size: 15, weight: 600 }),
-    text(0, 38, `${executed.toLocaleString()} cases executed, ${notApplicable} not applicable by design`, {
+    text(0, 20, 'Execution status across all applicable test cases', { size: 15, weight: 600 }),
+    text(0, 38, `${inScope.toLocaleString()} applicable cases, every one executed this cycle`, {
       size: 11.5,
       fill: COLORS.muted,
     }),
     arcs,
-    text(cx, cy - 4, `${populated.toLocaleString()}`, { size: 25, weight: 700, anchor: 'middle' }),
-    text(cx, cy + 15, 'test cases', { size: 11.5, fill: COLORS.muted, anchor: 'middle' }),
+    text(cx, cy - 8, `${passRate.toFixed(1)}%`, { size: 27, weight: 700, anchor: 'middle', fill: COLORS.pass }),
+    text(cx, cy + 12, 'pass rate', { size: 11.5, fill: COLORS.muted, anchor: 'middle' }),
+    text(cx, cy + 28, `${inScope.toLocaleString()} cases`, { size: 11, fill: COLORS.muted, anchor: 'middle' }),
     rows,
-    line(292, 236, width, 236, COLORS.grid, { width: 1 }),
-    text(292, 258, 'Pass rate on executed cases', { size: 12.5, weight: 600 }),
-    text(width, 258, `${passRate.toFixed(1)}%`, { size: 15, weight: 700, anchor: 'end', fill: COLORS.pass }),
-    text(292, 276, `${pass.toLocaleString()} of ${executed.toLocaleString()} executed`, {
-      size: 11,
-      fill: COLORS.muted,
-    }),
-    text(0, 292, `Excludes ${summary.placeholderRows.count} unpopulated placeholder rows in the DNF tabs (TC 141-210).`, {
-      size: 10.5,
+    line(292, 216, width, 216, COLORS.grid, { width: 1 }),
+    text(292, 234, 'Pass rate by template', { size: 12, weight: 600 }),
+    templateRows,
+    text(0, height - 6, `Scope: applicable cases only. ${summary.scope.excludedNotApplicable} unsupported combinations (marked NA) and ${summary.scope.excludedPlaceholderRows} unpopulated DNF placeholder rows are excluded.`, {
+      size: 10,
       fill: COLORS.muted,
     }),
     '</svg>',
@@ -305,8 +332,8 @@ export function renderCategoryChart(summary: EncryptionSummary): string {
   const top = 74;
   const height = top + summary.categories.length * (rowHeight + gap) + 18;
   const barX = 168;
-  const maxPopulated = Math.max(...summary.categories.map((c) => c.populated));
-  const unit = 330 / maxPopulated;
+  const maxInScope = Math.max(...summary.categories.map((c) => c.inScope));
+  const unit = 330 / maxInScope;
 
   const rows = summary.categories
     .map((category, index) => {
@@ -315,7 +342,6 @@ export function renderCategoryChart(summary: EncryptionSummary): string {
       const bars = [
         { value: category.pass, color: COLORS.pass },
         { value: category.fail, color: COLORS.fail },
-        { value: category.notApplicable, color: COLORS.notApplicable },
       ]
         .map((segment) => {
           if (segment.value === 0) return '';
@@ -352,14 +378,13 @@ export function renderCategoryChart(summary: EncryptionSummary): string {
     svgOpen(width, height),
     rect(0, 0, width, height, '#ffffff', 0),
     text(0, 20, 'Status by protection category', { size: 15, weight: 600 }),
-    text(0, 38, 'Sorted worst-first. Do Not Forward trails; Internal Confidential is near clean', {
+    text(0, 38, 'Applicable cases, sorted worst-first. Do Not Forward trails; Internal Confidential is near clean', {
       size: 11.5,
       fill: COLORS.muted,
     }),
     legend(0, 58, [
       { color: COLORS.pass, label: 'Pass' },
       { color: COLORS.fail, label: 'Fail' },
-      { color: COLORS.notApplicable, label: 'Not applicable' },
     ]),
     text(width, 58, 'pass rate', { size: 10.5, fill: COLORS.muted, anchor: 'end' }),
     rows,
@@ -371,11 +396,12 @@ export function renderCategoryChart(summary: EncryptionSummary): string {
 
 export function renderTrajectoryChart(summary: EncryptionSummary): string {
   const width = 650;
-  const height = 290;
+  const height = 292;
   const left = 44;
-  const right = width - 118;
-  const baseline = 222;
-  const topY = 74;
+  // Leaves room for the right-hand readout panel, including the longest template name.
+  const right = width - 204;
+  const baseline = 224;
+  const topY = 76;
   const weeks = summary.history.weeks;
   const columns = weeks.length + summary.history.placeholderWeeks;
   const stepX = (right - left) / Math.max(columns - 1, 1);
@@ -391,23 +417,49 @@ export function renderTrajectoryChart(summary: EncryptionSummary): string {
     )
     .join('');
 
-  const series = [
-    { key: 'passRate' as const, color: COLORS.pass, label: 'Pass rate (executed)' },
-    { key: 'coverage' as const, color: COLORS.accent, label: 'Execution coverage' },
+  const templateColors: Record<string, string> = {
+    'Encrypt Only': COLORS.accent,
+    'Do Not Forward': '#d13438',
+    'Internal Confidential': '#8661c5',
+  };
+
+  // Overall plus one line per protection template, so a single template
+  // regressing cannot hide inside the average.
+  interface Series {
+    label: string;
+    color: string;
+    valueAt: (week: WeekEntry) => number;
+    width: number;
+  }
+
+  const series: Series[] = [
+    { label: 'Overall', color: COLORS.pass, valueAt: (week) => week.passRate, width: 3 },
   ];
+  for (const template of Object.keys(summary.byTemplate)) {
+    series.push({
+      label: template,
+      color: templateColors[template] ?? COLORS.muted,
+      valueAt: (week) => week.byTemplate[template] ?? week.passRate,
+      width: 2,
+    });
+  }
 
   const plotted = series
     .map((serie) => {
       const path = weeks
-        .map((week, index) => `${index === 0 ? 'M' : 'L'} ${pointX(index)} ${scaleY(week[serie.key])}`)
+        .map((week, index) => `${index === 0 ? 'M' : 'L'} ${pointX(index)} ${scaleY(serie.valueAt(week))}`)
         .join(' ');
       const dots = weeks
         .map(
           (week, index) =>
-            `<circle cx="${pointX(index)}" cy="${scaleY(week[serie.key])}" r="5" fill="${serie.color}" stroke="#ffffff" stroke-width="1.5" />`,
+            `<circle cx="${pointX(index)}" cy="${scaleY(serie.valueAt(week))}" r="${serie.width === 3 ? 5.5 : 4}" fill="${serie.color}" stroke="#ffffff" stroke-width="1.5" />`,
         )
         .join('');
-      return `${weeks.length > 1 ? `<path d="${path}" fill="none" stroke="${serie.color}" stroke-width="2.5" />` : ''}${dots}`;
+      const trend =
+        weeks.length > 1
+          ? `<path d="${path}" fill="none" stroke="${serie.color}" stroke-width="${serie.width}" />`
+          : '';
+      return `${trend}${dots}`;
     })
     .join('');
 
@@ -426,62 +478,51 @@ export function renderTrajectoryChart(summary: EncryptionSummary): string {
 
   const pastColumns = weeks
     .map((week, index) =>
-      text(pointX(index), baseline + 18, week.label, {
-        size: 11,
-        weight: 600,
-        anchor: 'middle',
-      }),
+      text(pointX(index), baseline + 18, week.label, { size: 11, weight: 600, anchor: 'middle' }),
     )
     .join('');
 
   const latest = weeks.at(-1);
-  const latestIndex = weeks.length - 1;
-
-  // With a single baseline cycle the two values sit ~8px apart, so the readouts
-  // are placed beside the column at fixed offsets rather than above each dot.
-  const readouts = latest
-    ? [
-        text(pointX(latestIndex) + 14, scaleY(latest.passRate) - 8, `${latest.passRate.toFixed(1)}% pass rate`, {
-          size: 12,
-          weight: 700,
-          fill: COLORS.pass,
-        }),
-        text(
-          pointX(latestIndex) + 14,
-          scaleY(latest.passRate) + 8,
-          `${latest.pass.toLocaleString()} of ${latest.executed.toLocaleString()} executed`,
-          { size: 10.5, fill: COLORS.muted },
-        ),
-        text(pointX(latestIndex) + 14, scaleY(latest.coverage) + 30, `${latest.coverage.toFixed(1)}% coverage`, {
-          size: 12,
-          weight: 700,
-          fill: COLORS.accent,
-        }),
-        text(
-          pointX(latestIndex) + 14,
-          scaleY(latest.coverage) + 46,
-          `${latest.executed.toLocaleString()} of ${latest.populated.toLocaleString()} populated`,
-          { size: 10.5, fill: COLORS.muted },
-        ),
-      ].join('')
+  // Values sit only a few points apart, so the readout is a fixed panel rather
+  // than labels pinned to each dot.
+  const readout = latest
+    ? [...series]
+        .sort((a, b) => b.valueAt(latest) - a.valueAt(latest))
+        .map((serie, index) => {
+          const y = topY + 6 + index * 22;
+          return [
+            rect(right + 16, y - 9, 10, 10, serie.color, 2),
+            text(right + 32, y, serie.label, { size: 10.5, fill: COLORS.ink }),
+            text(width, y, `${serie.valueAt(latest).toFixed(1)}%`, {
+              size: 11.5,
+              weight: 700,
+              fill: serie.color,
+              anchor: 'end',
+            }),
+          ].join('');
+        })
+        .join('')
     : '';
 
   return [
     svgOpen(width, height),
     rect(0, 0, width, height, '#ffffff', 0),
-    text(0, 20, 'Trajectory: pass rate and execution coverage by cycle', { size: 15, weight: 600 }),
-    text(0, 38, `${latest?.label ?? 'W0'} is the baseline; each cycle appends one point, so the trend builds from here`, {
+    text(0, 20, 'Trajectory: pass rate by cycle', { size: 15, weight: 600 }),
+    text(0, 38, `${latest?.label ?? 'W0'} is the baseline at ${latest?.passRate.toFixed(1) ?? '0'}% overall; each cycle appends one point`, {
       size: 11.5,
       fill: COLORS.muted,
     }),
-    legend(0, 58, series.map((serie) => ({ color: serie.color, label: serie.label }))),
+    text(0, 56, 'Overall plus one line per protection template, over applicable cases only', {
+      size: 11.5,
+      fill: COLORS.muted,
+    }),
     gridLines,
     line(left, baseline, right, baseline, COLORS.muted, { width: 1 }),
     futureColumns,
     plotted,
     pastColumns,
-    readouts,
-    text(0, height - 6, 'Coverage = executed cases divided by populated cases. Awaiting the next cycle to extend both lines.', {
+    readout,
+    text(0, height - 6, `${latest?.label ?? 'W0'} values: ${latest?.pass.toLocaleString() ?? 0} pass and ${latest?.fail ?? 0} fail across ${latest?.inScope.toLocaleString() ?? 0} applicable cases.`, {
       size: 10.5,
       fill: COLORS.muted,
     }),
@@ -630,7 +671,7 @@ export function renderAutomationChart(summary: EncryptionSummary): string {
   let cursor = 0;
   const bar = summary.tiers
     .map((tier) => {
-      const w = (tier.count / summary.totals.populated) * width;
+      const w = (tier.count / summary.totals.inScope) * width;
       const block = [
         rect(cursor, barY, w - 2, barHeight, tierColor[tier.tier] ?? COLORS.tier4, 3),
         w > 46
@@ -669,7 +710,10 @@ export function renderAutomationChart(summary: EncryptionSummary): string {
   return [
     svgOpen(width, height),
     rect(0, 0, width, height, '#ffffff', 0),
-    text(0, 20, 'Automation viability of the 1,470 cases', { size: 15, weight: 600 }),
+    text(0, 20, `Automation viability of the ${summary.totals.inScope.toLocaleString()} applicable cases`, {
+      size: 15,
+      weight: 600,
+    }),
     text(0, 38, `${summary.automatableNow} cases (${summary.automatablePercent}%) are reachable with web plus IMAP automation; ${summary.plan.currentlyAutomated} automated today`, {
       size: 11.5,
       fill: COLORS.muted,
@@ -711,7 +755,7 @@ export function renderReportHtml(
   const categoryRows = summary.categories
     .map(
       (category) =>
-        `<tr><td>${category.category}</td><td>${category.populated}</td><td>${category.pass}</td><td>${category.fail}</td><td>${category.notApplicable}</td><td><strong>${category.passRate.toFixed(1)}%</strong></td></tr>`,
+        `<tr><td>${category.category}</td><td>${category.inScope}</td><td>${category.pass}</td><td>${category.fail}</td><td><strong>${category.passRate.toFixed(1)}%</strong></td></tr>`,
     )
     .join('');
   const defectRows = summary.defects
@@ -737,11 +781,11 @@ export function renderReportHtml(
 <body>
 <main>
   <h1>Encryption test suite: execution status and automation plan</h1>
-  <p class="lede">${summary.totals.populated.toLocaleString()} populated cases &middot; ${summary.totals.executed.toLocaleString()} executed &middot; ${summary.totals.passRate.toFixed(1)}% pass rate &middot; ${summary.defects.length} open defect classes &middot; generated ${generatedAt}</p>
+  <p class="lede">${summary.totals.inScope.toLocaleString()} applicable cases &middot; ${summary.totals.pass.toLocaleString()} pass &middot; ${summary.totals.fail} fail &middot; ${summary.totals.passRate.toFixed(1)}% pass rate &middot; ${summary.defects.length} open defect classes &middot; generated ${generatedAt}</p>
   ${charts.map((chart) => `<div class="chart" data-chart="${chart.slug}">${chart.svg}</div>`).join('\n  ')}
   <h2>Category detail</h2>
   <table>
-    <thead><tr><th>Category</th><th>Cases</th><th>Pass</th><th>Fail</th><th>N/A</th><th>Pass rate</th></tr></thead>
+    <thead><tr><th>Category</th><th>Applicable cases</th><th>Pass</th><th>Fail</th><th>Pass rate</th></tr></thead>
     <tbody>${categoryRows}</tbody>
   </table>
   <h2>Defect classes</h2>
@@ -754,8 +798,8 @@ export function renderReportHtml(
     <thead><tr><th>Phase</th><th>Name</th><th>Work</th><th>Unlocks</th></tr></thead>
     <tbody>${phaseRows}</tbody>
   </table>
-  <h2>Note on test-case counts</h2>
-  <p class="lede">${summary.placeholderRows.detail}</p>
+  <h2>Note on scope and counts</h2>
+  <p class="lede">${summary.scope.basis} ${summary.scope.rationale} Excluded this cycle: ${summary.scope.excludedNotApplicable} unsupported combinations and ${summary.scope.excludedPlaceholderRows} unpopulated placeholder rows, against ${summary.totals.plannedTcIds.toLocaleString()} planned TC ids.</p>
 </main>
 </body>
 </html>`;

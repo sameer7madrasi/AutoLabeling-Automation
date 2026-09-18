@@ -1,20 +1,22 @@
 {
-  "howToUpdate": "Append one entry to weeks after each execution cycle, then run 'npm run report:encryption'. Keep week numbers contiguous; the trajectory and per-feature tracker charts render placeholderWeeks empty columns ahead of the latest entry so the growth is visible.",
+  "howToUpdate": "Append one entry to weeks after each execution cycle, then run 'npm run report:encryption'. Counts cover applicable cases only (Pass or Fail); combinations a feature does not support are out of scope and never counted. The trajectory and per-feature tracker render placeholderWeeks empty columns ahead of the latest entry so the growth is visible.",
   "placeholderWeeks": 4,
   "weeks": [
     {
       "week": 0,
       "label": "W0",
       "cycleEnding": "2026-09-18",
-      "populated": 1470,
-      "executed": 1140,
+      "inScope": 1140,
       "pass": 946,
       "fail": 194,
-      "notApplicable": 330,
       "passRate": 83.0,
-      "coverage": 77.6,
       "automatedCases": 0,
       "openDefectClasses": 5,
+      "byTemplate": {
+        "Encrypt Only": 78.7,
+        "Do Not Forward": 74.4,
+        "Internal Confidential": 98.1
+      },
       "byCategory": {
         "EO-Label": 79.0,
         "EO-Subject": 79.3,

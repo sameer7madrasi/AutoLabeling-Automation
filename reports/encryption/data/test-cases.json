@@ -2,14 +2,11 @@
  "source": "Encryption_Revamp_Testsheet.xlsx",
  "extractedAt": "2026-09-18",
  "cycle": "W0",
- "placeholderRows": {
-  "count": 210,
-  "tabs": [
-   "DNF-Label",
-   "DNF-Subject",
-   "DNF-Default template"
-  ],
-  "detail": "TC 141-210 (spreadsheet rows 157-232) in each DNF tab hold only a TC id plus a stray \"NA\" in the OME Wrapper column; Scenario, Client, Tenant, Action, verification and Status are all empty. The Details tab lists Do Not Forward with Reply and Reply All only, so these were never in scope."
+ "scope": {
+  "basis": "Applicable cases only: every row carrying a Pass or Fail result.",
+  "excludedNotApplicable": 330,
+  "excludedPlaceholderRows": 210,
+  "rationale": "Rows marked NA are placeholders for combinations a feature does not support, so they are never executed and would only dilute the denominator. The placeholder rows are unpopulated TC ids in the DNF tabs (TC 141-210)."
  },
  "dimensions": {
   "templates": [
@@ -63,117 +60,128 @@
   }
  },
  "totals": {
-  "populated": 1470,
+  "inScope": 1140,
   "pass": 946,
   "fail": 194,
-  "notApplicable": 330,
-  "executed": 1140,
-  "passRate": 83.0
+  "passRate": 83.0,
+  "plannedTcIds": 1680
+ },
+ "byTemplate": {
+  "Encrypt Only": {
+   "inScope": 488,
+   "pass": 384,
+   "fail": 104,
+   "passRate": 78.7
+  },
+  "Do Not Forward": {
+   "inScope": 328,
+   "pass": 244,
+   "fail": 84,
+   "passRate": 74.4
+  },
+  "Internal Confidential": {
+   "inScope": 324,
+   "pass": 318,
+   "fail": 6,
+   "passRate": 98.1
+  }
  },
  "categories": [
   {
    "category": "EO-Label",
    "template": "Encrypt Only",
    "trigger": "Label",
-   "plannedTcIds": 210,
-   "populated": 210,
-   "blankStatusRows": 0,
+   "inScope": 162,
    "pass": 128,
    "fail": 34,
-   "notApplicable": 48,
-   "executed": 162,
-   "passRate": 79.0
+   "passRate": 79.0,
+   "excludedNotApplicable": 48,
+   "excludedPlaceholderRows": 0,
+   "plannedTcIds": 210
   },
   {
    "category": "EO-Subject",
    "template": "Encrypt Only",
    "trigger": "Subject keyword",
-   "plannedTcIds": 210,
-   "populated": 210,
-   "blankStatusRows": 0,
+   "inScope": 164,
    "pass": 130,
    "fail": 34,
-   "notApplicable": 46,
-   "executed": 164,
-   "passRate": 79.3
+   "passRate": 79.3,
+   "excludedNotApplicable": 46,
+   "excludedPlaceholderRows": 0,
+   "plannedTcIds": 210
   },
   {
    "category": "EO-Options",
    "template": "Encrypt Only",
    "trigger": "Options / default template",
-   "plannedTcIds": 210,
-   "populated": 210,
-   "blankStatusRows": 0,
+   "inScope": 162,
    "pass": 126,
    "fail": 36,
-   "notApplicable": 48,
-   "executed": 162,
-   "passRate": 77.8
+   "passRate": 77.8,
+   "excludedNotApplicable": 48,
+   "excludedPlaceholderRows": 0,
+   "plannedTcIds": 210
   },
   {
    "category": "DNF-Label",
    "template": "Do Not Forward",
    "trigger": "Label",
-   "plannedTcIds": 210,
-   "populated": 140,
-   "blankStatusRows": 70,
+   "inScope": 112,
    "pass": 84,
    "fail": 28,
-   "notApplicable": 28,
-   "executed": 112,
-   "passRate": 75.0
+   "passRate": 75.0,
+   "excludedNotApplicable": 28,
+   "excludedPlaceholderRows": 70,
+   "plannedTcIds": 210
   },
   {
    "category": "DNF-Subject",
    "template": "Do Not Forward",
    "trigger": "Subject keyword",
-   "plannedTcIds": 210,
-   "populated": 140,
-   "blankStatusRows": 70,
+   "inScope": 108,
    "pass": 80,
    "fail": 28,
-   "notApplicable": 32,
-   "executed": 108,
-   "passRate": 74.1
+   "passRate": 74.1,
+   "excludedNotApplicable": 32,
+   "excludedPlaceholderRows": 70,
+   "plannedTcIds": 210
   },
   {
    "category": "DNF-Default template",
    "template": "Do Not Forward",
    "trigger": "Options / default template",
-   "plannedTcIds": 210,
-   "populated": 140,
-   "blankStatusRows": 70,
+   "inScope": 108,
    "pass": 80,
    "fail": 28,
-   "notApplicable": 32,
-   "executed": 108,
-   "passRate": 74.1
+   "passRate": 74.1,
+   "excludedNotApplicable": 32,
+   "excludedPlaceholderRows": 70,
+   "plannedTcIds": 210
   },
   {
    "category": "IC-Label",
    "template": "Internal Confidential",
    "trigger": "Label",
-   "plannedTcIds": 210,
-   "populated": 210,
-   "blankStatusRows": 0,
+   "inScope": 162,
    "pass": 159,
    "fail": 3,
-   "notApplicable": 48,
-   "executed": 162,
-   "passRate": 98.1
+   "passRate": 98.1,
+   "excludedNotApplicable": 48,
+   "excludedPlaceholderRows": 0,
+   "plannedTcIds": 210
   },
   {
    "category": "IC-Subject",
    "template": "Internal Confidential",
    "trigger": "Subject keyword",
-   "plannedTcIds": 210,
-   "populated": 210,
-   "blankStatusRows": 0,
+   "inScope": 162,
    "pass": 159,
    "fail": 3,
-   "notApplicable": 48,
-   "executed": 162,
-   "passRate": 98.1
+   "passRate": 98.1,
+   "excludedNotApplicable": 48,
+   "excludedPlaceholderRows": 0,
+   "plannedTcIds": 210
   }
  ],
  "cases": [
@@ -322,30 +330,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 13,
-   "category": "EO-Label",
-   "template": "Encrypt Only",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 14,
-   "category": "EO-Label",
-   "template": "Encrypt Only",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 15,
    "category": "EO-Label",
    "template": "Encrypt Only",
@@ -378,30 +362,6 @@
    "clientPair": "OWA TO WODC Old(Classic)",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 18,
-   "category": "EO-Label",
-   "template": "Encrypt Only",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 19,
-   "category": "EO-Label",
-   "template": "Encrypt Only",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -562,30 +522,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 33,
-   "category": "EO-Label",
-   "template": "Encrypt Only",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 34,
-   "category": "EO-Label",
-   "template": "Encrypt Only",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 35,
    "category": "EO-Label",
    "template": "Encrypt Only",
@@ -618,30 +554,6 @@
    "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 38,
-   "category": "EO-Label",
-   "template": "Encrypt Only",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 39,
-   "category": "EO-Label",
-   "template": "Encrypt Only",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -682,30 +594,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 43,
-   "category": "EO-Label",
-   "template": "Encrypt Only",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 44,
-   "category": "EO-Label",
-   "template": "Encrypt Only",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 45,
    "category": "EO-Label",
    "template": "Encrypt Only",
@@ -738,30 +626,6 @@
    "clientPair": "OWA TO WODC New",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 48,
-   "category": "EO-Label",
-   "template": "Encrypt Only",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 49,
-   "category": "EO-Label",
-   "template": "Encrypt Only",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -922,30 +786,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 63,
-   "category": "EO-Label",
-   "template": "Encrypt Only",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 64,
-   "category": "EO-Label",
-   "template": "Encrypt Only",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 65,
    "category": "EO-Label",
    "template": "Encrypt Only",
@@ -978,30 +818,6 @@
    "clientPair": "WODC New TO WODC New",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 68,
-   "category": "EO-Label",
-   "template": "Encrypt Only",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 69,
-   "category": "EO-Label",
-   "template": "Encrypt Only",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -1162,30 +978,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 83,
-   "category": "EO-Label",
-   "template": "Encrypt Only",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 84,
-   "category": "EO-Label",
-   "template": "Encrypt Only",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 85,
    "category": "EO-Label",
    "template": "Encrypt Only",
@@ -1218,30 +1010,6 @@
    "clientPair": "OWA TO WODC Old(Classic)",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 88,
-   "category": "EO-Label",
-   "template": "Encrypt Only",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 89,
-   "category": "EO-Label",
-   "template": "Encrypt Only",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -1402,30 +1170,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 103,
-   "category": "EO-Label",
-   "template": "Encrypt Only",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 104,
-   "category": "EO-Label",
-   "template": "Encrypt Only",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 105,
    "category": "EO-Label",
    "template": "Encrypt Only",
@@ -1458,30 +1202,6 @@
    "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 108,
-   "category": "EO-Label",
-   "template": "Encrypt Only",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 109,
-   "category": "EO-Label",
-   "template": "Encrypt Only",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -1522,30 +1242,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 113,
-   "category": "EO-Label",
-   "template": "Encrypt Only",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 114,
-   "category": "EO-Label",
-   "template": "Encrypt Only",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 115,
    "category": "EO-Label",
    "template": "Encrypt Only",
@@ -1578,30 +1274,6 @@
    "clientPair": "OWA TO WODC New",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 118,
-   "category": "EO-Label",
-   "template": "Encrypt Only",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 119,
-   "category": "EO-Label",
-   "template": "Encrypt Only",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -1762,30 +1434,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 133,
-   "category": "EO-Label",
-   "template": "Encrypt Only",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 134,
-   "category": "EO-Label",
-   "template": "Encrypt Only",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 135,
    "category": "EO-Label",
    "template": "Encrypt Only",
@@ -1818,30 +1466,6 @@
    "clientPair": "WODC New TO WODC New",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 138,
-   "category": "EO-Label",
-   "template": "Encrypt Only",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 139,
-   "category": "EO-Label",
-   "template": "Encrypt Only",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -2002,30 +1626,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 153,
-   "category": "EO-Label",
-   "template": "Encrypt Only",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 154,
-   "category": "EO-Label",
-   "template": "Encrypt Only",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 155,
    "category": "EO-Label",
    "template": "Encrypt Only",
@@ -2058,30 +1658,6 @@
    "clientPair": "OWA TO WODC Old(Classic)",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 158,
-   "category": "EO-Label",
-   "template": "Encrypt Only",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 159,
-   "category": "EO-Label",
-   "template": "Encrypt Only",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -2242,30 +1818,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 173,
-   "category": "EO-Label",
-   "template": "Encrypt Only",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 174,
-   "category": "EO-Label",
-   "template": "Encrypt Only",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 175,
    "category": "EO-Label",
    "template": "Encrypt Only",
@@ -2298,30 +1850,6 @@
    "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 178,
-   "category": "EO-Label",
-   "template": "Encrypt Only",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 179,
-   "category": "EO-Label",
-   "template": "Encrypt Only",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -2362,30 +1890,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 183,
-   "category": "EO-Label",
-   "template": "Encrypt Only",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 184,
-   "category": "EO-Label",
-   "template": "Encrypt Only",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 185,
    "category": "EO-Label",
    "template": "Encrypt Only",
@@ -2418,30 +1922,6 @@
    "clientPair": "OWA TO WODC New",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 188,
-   "category": "EO-Label",
-   "template": "Encrypt Only",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 189,
-   "category": "EO-Label",
-   "template": "Encrypt Only",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -2602,30 +2082,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 203,
-   "category": "EO-Label",
-   "template": "Encrypt Only",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 204,
-   "category": "EO-Label",
-   "template": "Encrypt Only",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 205,
    "category": "EO-Label",
    "template": "Encrypt Only",
@@ -2658,30 +2114,6 @@
    "clientPair": "WODC New TO WODC New",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 208,
-   "category": "EO-Label",
-   "template": "Encrypt Only",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 209,
-   "category": "EO-Label",
-   "template": "Encrypt Only",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -2842,30 +2274,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 13,
-   "category": "EO-Subject",
-   "template": "Encrypt Only",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 14,
-   "category": "EO-Subject",
-   "template": "Encrypt Only",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 15,
    "category": "EO-Subject",
    "template": "Encrypt Only",
@@ -2898,30 +2306,6 @@
    "clientPair": "OWA TO WODC Old(Classic)",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 18,
-   "category": "EO-Subject",
-   "template": "Encrypt Only",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 19,
-   "category": "EO-Subject",
-   "template": "Encrypt Only",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -3142,30 +2526,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 38,
-   "category": "EO-Subject",
-   "template": "Encrypt Only",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 39,
-   "category": "EO-Subject",
-   "template": "Encrypt Only",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 40,
    "category": "EO-Subject",
    "template": "Encrypt Only",
@@ -3202,30 +2562,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 43,
-   "category": "EO-Subject",
-   "template": "Encrypt Only",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 44,
-   "category": "EO-Subject",
-   "template": "Encrypt Only",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 45,
    "category": "EO-Subject",
    "template": "Encrypt Only",
@@ -3258,30 +2594,6 @@
    "clientPair": "OWA TO WODC New",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 48,
-   "category": "EO-Subject",
-   "template": "Encrypt Only",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 49,
-   "category": "EO-Subject",
-   "template": "Encrypt Only",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -3442,30 +2754,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 63,
-   "category": "EO-Subject",
-   "template": "Encrypt Only",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 64,
-   "category": "EO-Subject",
-   "template": "Encrypt Only",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 65,
    "category": "EO-Subject",
    "template": "Encrypt Only",
@@ -3498,30 +2786,6 @@
    "clientPair": "WODC New TO WODC New",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 68,
-   "category": "EO-Subject",
-   "template": "Encrypt Only",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 69,
-   "category": "EO-Subject",
-   "template": "Encrypt Only",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -3682,30 +2946,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 83,
-   "category": "EO-Subject",
-   "template": "Encrypt Only",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 84,
-   "category": "EO-Subject",
-   "template": "Encrypt Only",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 85,
    "category": "EO-Subject",
    "template": "Encrypt Only",
@@ -3738,30 +2978,6 @@
    "clientPair": "OWA TO WODC Old(Classic)",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 88,
-   "category": "EO-Subject",
-   "template": "Encrypt Only",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 89,
-   "category": "EO-Subject",
-   "template": "Encrypt Only",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -3918,30 +3134,6 @@
    "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
    "tenantPair": "Prod to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 103,
-   "category": "EO-Subject",
-   "template": "Encrypt Only",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 104,
-   "category": "EO-Subject",
-   "template": "Encrypt Only",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -3982,30 +3174,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 108,
-   "category": "EO-Subject",
-   "template": "Encrypt Only",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 109,
-   "category": "EO-Subject",
-   "template": "Encrypt Only",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 110,
    "category": "EO-Subject",
    "template": "Encrypt Only",
@@ -4042,30 +3210,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 113,
-   "category": "EO-Subject",
-   "template": "Encrypt Only",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 114,
-   "category": "EO-Subject",
-   "template": "Encrypt Only",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 115,
    "category": "EO-Subject",
    "template": "Encrypt Only",
@@ -4098,30 +3242,6 @@
    "clientPair": "OWA TO WODC New",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 118,
-   "category": "EO-Subject",
-   "template": "Encrypt Only",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 119,
-   "category": "EO-Subject",
-   "template": "Encrypt Only",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -4278,30 +3398,6 @@
    "clientPair": "WODC New TO WODC New",
    "tenantPair": "Prod to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 133,
-   "category": "EO-Subject",
-   "template": "Encrypt Only",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 134,
-   "category": "EO-Subject",
-   "template": "Encrypt Only",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -4342,30 +3438,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 138,
-   "category": "EO-Subject",
-   "template": "Encrypt Only",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 139,
-   "category": "EO-Subject",
-   "template": "Encrypt Only",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 140,
    "category": "EO-Subject",
    "template": "Encrypt Only",
@@ -4522,30 +3594,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 153,
-   "category": "EO-Subject",
-   "template": "Encrypt Only",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 154,
-   "category": "EO-Subject",
-   "template": "Encrypt Only",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 155,
    "category": "EO-Subject",
    "template": "Encrypt Only",
@@ -4578,30 +3626,6 @@
    "clientPair": "OWA TO WODC Old(Classic)",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 158,
-   "category": "EO-Subject",
-   "template": "Encrypt Only",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 159,
-   "category": "EO-Subject",
-   "template": "Encrypt Only",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -4762,30 +3786,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 173,
-   "category": "EO-Subject",
-   "template": "Encrypt Only",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 174,
-   "category": "EO-Subject",
-   "template": "Encrypt Only",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 175,
    "category": "EO-Subject",
    "template": "Encrypt Only",
@@ -4818,30 +3818,6 @@
    "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 178,
-   "category": "EO-Subject",
-   "template": "Encrypt Only",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 179,
-   "category": "EO-Subject",
-   "template": "Encrypt Only",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -4882,30 +3858,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 183,
-   "category": "EO-Subject",
-   "template": "Encrypt Only",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 184,
-   "category": "EO-Subject",
-   "template": "Encrypt Only",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 185,
    "category": "EO-Subject",
    "template": "Encrypt Only",
@@ -4938,30 +3890,6 @@
    "clientPair": "OWA TO WODC New",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 188,
-   "category": "EO-Subject",
-   "template": "Encrypt Only",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 189,
-   "category": "EO-Subject",
-   "template": "Encrypt Only",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -5122,30 +4050,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 203,
-   "category": "EO-Subject",
-   "template": "Encrypt Only",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 204,
-   "category": "EO-Subject",
-   "template": "Encrypt Only",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 205,
    "category": "EO-Subject",
    "template": "Encrypt Only",
@@ -5178,30 +4082,6 @@
    "clientPair": "WODC New TO WODC New",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 208,
-   "category": "EO-Subject",
-   "template": "Encrypt Only",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 209,
-   "category": "EO-Subject",
-   "template": "Encrypt Only",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -5362,30 +4242,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 13,
-   "category": "EO-Options",
-   "template": "Encrypt Only",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 14,
-   "category": "EO-Options",
-   "template": "Encrypt Only",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 15,
    "category": "EO-Options",
    "template": "Encrypt Only",
@@ -5418,30 +4274,6 @@
    "clientPair": "OWA TO WODC Old(Classic)",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 18,
-   "category": "EO-Options",
-   "template": "Encrypt Only",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 19,
-   "category": "EO-Options",
-   "template": "Encrypt Only",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -5602,30 +4434,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 33,
-   "category": "EO-Options",
-   "template": "Encrypt Only",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 34,
-   "category": "EO-Options",
-   "template": "Encrypt Only",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 35,
    "category": "EO-Options",
    "template": "Encrypt Only",
@@ -5658,30 +4466,6 @@
    "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 38,
-   "category": "EO-Options",
-   "template": "Encrypt Only",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 39,
-   "category": "EO-Options",
-   "template": "Encrypt Only",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -5722,30 +4506,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 43,
-   "category": "EO-Options",
-   "template": "Encrypt Only",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 44,
-   "category": "EO-Options",
-   "template": "Encrypt Only",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 45,
    "category": "EO-Options",
    "template": "Encrypt Only",
@@ -5778,30 +4538,6 @@
    "clientPair": "OWA TO WODC New",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 48,
-   "category": "EO-Options",
-   "template": "Encrypt Only",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 49,
-   "category": "EO-Options",
-   "template": "Encrypt Only",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -5962,30 +4698,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 63,
-   "category": "EO-Options",
-   "template": "Encrypt Only",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 64,
-   "category": "EO-Options",
-   "template": "Encrypt Only",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 65,
    "category": "EO-Options",
    "template": "Encrypt Only",
@@ -6018,30 +4730,6 @@
    "clientPair": "WODC New TO WODC New",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 68,
-   "category": "EO-Options",
-   "template": "Encrypt Only",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 69,
-   "category": "EO-Options",
-   "template": "Encrypt Only",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -6202,30 +4890,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 83,
-   "category": "EO-Options",
-   "template": "Encrypt Only",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 84,
-   "category": "EO-Options",
-   "template": "Encrypt Only",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 85,
    "category": "EO-Options",
    "template": "Encrypt Only",
@@ -6258,30 +4922,6 @@
    "clientPair": "OWA TO WODC Old(Classic)",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 88,
-   "category": "EO-Options",
-   "template": "Encrypt Only",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 89,
-   "category": "EO-Options",
-   "template": "Encrypt Only",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -6442,30 +5082,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 103,
-   "category": "EO-Options",
-   "template": "Encrypt Only",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 104,
-   "category": "EO-Options",
-   "template": "Encrypt Only",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 105,
    "category": "EO-Options",
    "template": "Encrypt Only",
@@ -6498,30 +5114,6 @@
    "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 108,
-   "category": "EO-Options",
-   "template": "Encrypt Only",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 109,
-   "category": "EO-Options",
-   "template": "Encrypt Only",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -6562,30 +5154,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 113,
-   "category": "EO-Options",
-   "template": "Encrypt Only",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 114,
-   "category": "EO-Options",
-   "template": "Encrypt Only",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 115,
    "category": "EO-Options",
    "template": "Encrypt Only",
@@ -6618,30 +5186,6 @@
    "clientPair": "OWA TO WODC New",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 118,
-   "category": "EO-Options",
-   "template": "Encrypt Only",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 119,
-   "category": "EO-Options",
-   "template": "Encrypt Only",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -6802,30 +5346,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 133,
-   "category": "EO-Options",
-   "template": "Encrypt Only",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 134,
-   "category": "EO-Options",
-   "template": "Encrypt Only",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 135,
    "category": "EO-Options",
    "template": "Encrypt Only",
@@ -6858,30 +5378,6 @@
    "clientPair": "WODC New TO WODC New",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 138,
-   "category": "EO-Options",
-   "template": "Encrypt Only",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 139,
-   "category": "EO-Options",
-   "template": "Encrypt Only",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -7042,30 +5538,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 153,
-   "category": "EO-Options",
-   "template": "Encrypt Only",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 154,
-   "category": "EO-Options",
-   "template": "Encrypt Only",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 155,
    "category": "EO-Options",
    "template": "Encrypt Only",
@@ -7098,30 +5570,6 @@
    "clientPair": "OWA TO WODC Old(Classic)",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 158,
-   "category": "EO-Options",
-   "template": "Encrypt Only",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 159,
-   "category": "EO-Options",
-   "template": "Encrypt Only",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -7282,30 +5730,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 173,
-   "category": "EO-Options",
-   "template": "Encrypt Only",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 174,
-   "category": "EO-Options",
-   "template": "Encrypt Only",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 175,
    "category": "EO-Options",
    "template": "Encrypt Only",
@@ -7338,30 +5762,6 @@
    "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 178,
-   "category": "EO-Options",
-   "template": "Encrypt Only",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 179,
-   "category": "EO-Options",
-   "template": "Encrypt Only",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -7402,30 +5802,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 183,
-   "category": "EO-Options",
-   "template": "Encrypt Only",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 184,
-   "category": "EO-Options",
-   "template": "Encrypt Only",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 185,
    "category": "EO-Options",
    "template": "Encrypt Only",
@@ -7458,30 +5834,6 @@
    "clientPair": "OWA TO WODC New",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 188,
-   "category": "EO-Options",
-   "template": "Encrypt Only",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 189,
-   "category": "EO-Options",
-   "template": "Encrypt Only",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -7642,30 +5994,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 203,
-   "category": "EO-Options",
-   "template": "Encrypt Only",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 204,
-   "category": "EO-Options",
-   "template": "Encrypt Only",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 205,
    "category": "EO-Options",
    "template": "Encrypt Only",
@@ -7698,30 +6026,6 @@
    "clientPair": "WODC New TO WODC New",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 208,
-   "category": "EO-Options",
-   "template": "Encrypt Only",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 209,
-   "category": "EO-Options",
-   "template": "Encrypt Only",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -7882,30 +6186,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 13,
-   "category": "DNF-Label",
-   "template": "Do Not Forward",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 14,
-   "category": "DNF-Label",
-   "template": "Do Not Forward",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 15,
    "category": "DNF-Label",
    "template": "Do Not Forward",
@@ -7938,30 +6218,6 @@
    "clientPair": "OWA TO WODC Old(Classic)",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 18,
-   "category": "DNF-Label",
-   "template": "Do Not Forward",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 19,
-   "category": "DNF-Label",
-   "template": "Do Not Forward",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -8122,30 +6378,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 33,
-   "category": "DNF-Label",
-   "template": "Do Not Forward",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 34,
-   "category": "DNF-Label",
-   "template": "Do Not Forward",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 35,
    "category": "DNF-Label",
    "template": "Do Not Forward",
@@ -8179,30 +6411,6 @@
    "tenantPair": "SDF to SDF",
    "status": "Fail",
    "defectTheme": "DNF forward not blocked",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 38,
-   "category": "DNF-Label",
-   "template": "Do Not Forward",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 39,
-   "category": "DNF-Label",
-   "template": "Do Not Forward",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
    "automationTier": "C"
   },
   {
@@ -8242,30 +6450,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 43,
-   "category": "DNF-Label",
-   "template": "Do Not Forward",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 44,
-   "category": "DNF-Label",
-   "template": "Do Not Forward",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 45,
    "category": "DNF-Label",
    "template": "Do Not Forward",
@@ -8298,30 +6482,6 @@
    "clientPair": "OWA TO WODC New",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 48,
-   "category": "DNF-Label",
-   "template": "Do Not Forward",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 49,
-   "category": "DNF-Label",
-   "template": "Do Not Forward",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -8482,30 +6642,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 63,
-   "category": "DNF-Label",
-   "template": "Do Not Forward",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 64,
-   "category": "DNF-Label",
-   "template": "Do Not Forward",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 65,
    "category": "DNF-Label",
    "template": "Do Not Forward",
@@ -8539,30 +6675,6 @@
    "tenantPair": "SDF to SDF",
    "status": "Fail",
    "defectTheme": "DNF forward not blocked",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 68,
-   "category": "DNF-Label",
-   "template": "Do Not Forward",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 69,
-   "category": "DNF-Label",
-   "template": "Do Not Forward",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
    "automationTier": "C"
   },
   {
@@ -8722,30 +6834,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 83,
-   "category": "DNF-Label",
-   "template": "Do Not Forward",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 84,
-   "category": "DNF-Label",
-   "template": "Do Not Forward",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 85,
    "category": "DNF-Label",
    "template": "Do Not Forward",
@@ -8778,30 +6866,6 @@
    "clientPair": "OWA TO WODC Old(Classic)",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 88,
-   "category": "DNF-Label",
-   "template": "Do Not Forward",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 89,
-   "category": "DNF-Label",
-   "template": "Do Not Forward",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -8974,30 +7038,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 104,
-   "category": "DNF-Label",
-   "template": "Do Not Forward",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 105,
-   "category": "DNF-Label",
-   "template": "Do Not Forward",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "Prod to Hotmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 106,
    "category": "DNF-Label",
    "template": "Do Not Forward",
@@ -9078,30 +7118,6 @@
    "clientPair": "OWA TO WODC New",
    "tenantPair": "Prod to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 113,
-   "category": "DNF-Label",
-   "template": "Do Not Forward",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 114,
-   "category": "DNF-Label",
-   "template": "Do Not Forward",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -9322,30 +7338,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 133,
-   "category": "DNF-Label",
-   "template": "Do Not Forward",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 134,
-   "category": "DNF-Label",
-   "template": "Do Not Forward",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 135,
    "category": "DNF-Label",
    "template": "Do Not Forward",
@@ -9378,30 +7370,6 @@
    "clientPair": "WODC New TO WODC New",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 138,
-   "category": "DNF-Label",
-   "template": "Do Not Forward",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 139,
-   "category": "DNF-Label",
-   "template": "Do Not Forward",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -9562,30 +7530,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 13,
-   "category": "DNF-Subject",
-   "template": "Do Not Forward",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 14,
-   "category": "DNF-Subject",
-   "template": "Do Not Forward",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 15,
    "category": "DNF-Subject",
    "template": "Do Not Forward",
@@ -9618,30 +7562,6 @@
    "clientPair": "OWA TO WODC Old(Classic)",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 18,
-   "category": "DNF-Subject",
-   "template": "Do Not Forward",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 19,
-   "category": "DNF-Subject",
-   "template": "Do Not Forward",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -9802,30 +7722,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 33,
-   "category": "DNF-Subject",
-   "template": "Do Not Forward",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 34,
-   "category": "DNF-Subject",
-   "template": "Do Not Forward",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 35,
    "category": "DNF-Subject",
    "template": "Do Not Forward",
@@ -9859,30 +7755,6 @@
    "tenantPair": "SDF to SDF",
    "status": "Fail",
    "defectTheme": "DNF forward not blocked",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 38,
-   "category": "DNF-Subject",
-   "template": "Do Not Forward",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 39,
-   "category": "DNF-Subject",
-   "template": "Do Not Forward",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
    "automationTier": "C"
   },
   {
@@ -9922,30 +7794,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 43,
-   "category": "DNF-Subject",
-   "template": "Do Not Forward",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 44,
-   "category": "DNF-Subject",
-   "template": "Do Not Forward",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 45,
    "category": "DNF-Subject",
    "template": "Do Not Forward",
@@ -9978,30 +7826,6 @@
    "clientPair": "OWA TO WODC New",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 48,
-   "category": "DNF-Subject",
-   "template": "Do Not Forward",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 49,
-   "category": "DNF-Subject",
-   "template": "Do Not Forward",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -10162,30 +7986,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 63,
-   "category": "DNF-Subject",
-   "template": "Do Not Forward",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 64,
-   "category": "DNF-Subject",
-   "template": "Do Not Forward",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 65,
    "category": "DNF-Subject",
    "template": "Do Not Forward",
@@ -10219,30 +8019,6 @@
    "tenantPair": "SDF to SDF",
    "status": "Fail",
    "defectTheme": "DNF forward not blocked",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 68,
-   "category": "DNF-Subject",
-   "template": "Do Not Forward",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 69,
-   "category": "DNF-Subject",
-   "template": "Do Not Forward",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
    "automationTier": "C"
   },
   {
@@ -10402,30 +8178,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 83,
-   "category": "DNF-Subject",
-   "template": "Do Not Forward",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 84,
-   "category": "DNF-Subject",
-   "template": "Do Not Forward",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 85,
    "category": "DNF-Subject",
    "template": "Do Not Forward",
@@ -10458,30 +8210,6 @@
    "clientPair": "OWA TO WODC Old(Classic)",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 88,
-   "category": "DNF-Subject",
-   "template": "Do Not Forward",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 89,
-   "category": "DNF-Subject",
-   "template": "Do Not Forward",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -10642,30 +8370,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 103,
-   "category": "DNF-Subject",
-   "template": "Do Not Forward",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 104,
-   "category": "DNF-Subject",
-   "template": "Do Not Forward",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 105,
    "category": "DNF-Subject",
    "template": "Do Not Forward",
@@ -10698,30 +8402,6 @@
    "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 108,
-   "category": "DNF-Subject",
-   "template": "Do Not Forward",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 109,
-   "category": "DNF-Subject",
-   "template": "Do Not Forward",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -10762,30 +8442,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 113,
-   "category": "DNF-Subject",
-   "template": "Do Not Forward",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 114,
-   "category": "DNF-Subject",
-   "template": "Do Not Forward",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 115,
    "category": "DNF-Subject",
    "template": "Do Not Forward",
@@ -10818,30 +8474,6 @@
    "clientPair": "OWA TO WODC New",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 118,
-   "category": "DNF-Subject",
-   "template": "Do Not Forward",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 119,
-   "category": "DNF-Subject",
-   "template": "Do Not Forward",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -11002,30 +8634,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 133,
-   "category": "DNF-Subject",
-   "template": "Do Not Forward",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 134,
-   "category": "DNF-Subject",
-   "template": "Do Not Forward",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 135,
    "category": "DNF-Subject",
    "template": "Do Not Forward",
@@ -11058,30 +8666,6 @@
    "clientPair": "WODC New TO WODC New",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 138,
-   "category": "DNF-Subject",
-   "template": "Do Not Forward",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 139,
-   "category": "DNF-Subject",
-   "template": "Do Not Forward",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -11242,30 +8826,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 13,
-   "category": "DNF-Default template",
-   "template": "Do Not Forward",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 14,
-   "category": "DNF-Default template",
-   "template": "Do Not Forward",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 15,
    "category": "DNF-Default template",
    "template": "Do Not Forward",
@@ -11298,30 +8858,6 @@
    "clientPair": "OWA TO WODC Old(Classic)",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 18,
-   "category": "DNF-Default template",
-   "template": "Do Not Forward",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 19,
-   "category": "DNF-Default template",
-   "template": "Do Not Forward",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -11482,30 +9018,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 33,
-   "category": "DNF-Default template",
-   "template": "Do Not Forward",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 34,
-   "category": "DNF-Default template",
-   "template": "Do Not Forward",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 35,
    "category": "DNF-Default template",
    "template": "Do Not Forward",
@@ -11539,30 +9051,6 @@
    "tenantPair": "SDF to SDF",
    "status": "Fail",
    "defectTheme": "DNF forward not blocked",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 38,
-   "category": "DNF-Default template",
-   "template": "Do Not Forward",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 39,
-   "category": "DNF-Default template",
-   "template": "Do Not Forward",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
    "automationTier": "C"
   },
   {
@@ -11602,30 +9090,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 43,
-   "category": "DNF-Default template",
-   "template": "Do Not Forward",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 44,
-   "category": "DNF-Default template",
-   "template": "Do Not Forward",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 45,
    "category": "DNF-Default template",
    "template": "Do Not Forward",
@@ -11658,30 +9122,6 @@
    "clientPair": "OWA TO WODC New",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 48,
-   "category": "DNF-Default template",
-   "template": "Do Not Forward",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 49,
-   "category": "DNF-Default template",
-   "template": "Do Not Forward",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -11842,30 +9282,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 63,
-   "category": "DNF-Default template",
-   "template": "Do Not Forward",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 64,
-   "category": "DNF-Default template",
-   "template": "Do Not Forward",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 65,
    "category": "DNF-Default template",
    "template": "Do Not Forward",
@@ -11899,30 +9315,6 @@
    "tenantPair": "SDF to SDF",
    "status": "Fail",
    "defectTheme": "DNF forward not blocked",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 68,
-   "category": "DNF-Default template",
-   "template": "Do Not Forward",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 69,
-   "category": "DNF-Default template",
-   "template": "Do Not Forward",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
    "automationTier": "C"
   },
   {
@@ -12082,30 +9474,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 83,
-   "category": "DNF-Default template",
-   "template": "Do Not Forward",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 84,
-   "category": "DNF-Default template",
-   "template": "Do Not Forward",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 85,
    "category": "DNF-Default template",
    "template": "Do Not Forward",
@@ -12138,30 +9506,6 @@
    "clientPair": "OWA TO WODC Old(Classic)",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 88,
-   "category": "DNF-Default template",
-   "template": "Do Not Forward",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 89,
-   "category": "DNF-Default template",
-   "template": "Do Not Forward",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -12322,30 +9666,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 103,
-   "category": "DNF-Default template",
-   "template": "Do Not Forward",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 104,
-   "category": "DNF-Default template",
-   "template": "Do Not Forward",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 105,
    "category": "DNF-Default template",
    "template": "Do Not Forward",
@@ -12378,30 +9698,6 @@
    "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 108,
-   "category": "DNF-Default template",
-   "template": "Do Not Forward",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 109,
-   "category": "DNF-Default template",
-   "template": "Do Not Forward",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -12442,30 +9738,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 113,
-   "category": "DNF-Default template",
-   "template": "Do Not Forward",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 114,
-   "category": "DNF-Default template",
-   "template": "Do Not Forward",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 115,
    "category": "DNF-Default template",
    "template": "Do Not Forward",
@@ -12498,30 +9770,6 @@
    "clientPair": "OWA TO WODC New",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 118,
-   "category": "DNF-Default template",
-   "template": "Do Not Forward",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 119,
-   "category": "DNF-Default template",
-   "template": "Do Not Forward",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -12682,30 +9930,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 133,
-   "category": "DNF-Default template",
-   "template": "Do Not Forward",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 134,
-   "category": "DNF-Default template",
-   "template": "Do Not Forward",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 135,
    "category": "DNF-Default template",
    "template": "Do Not Forward",
@@ -12738,30 +9962,6 @@
    "clientPair": "WODC New TO WODC New",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 138,
-   "category": "DNF-Default template",
-   "template": "Do Not Forward",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 139,
-   "category": "DNF-Default template",
-   "template": "Do Not Forward",
-   "trigger": "Options / default template",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -12922,30 +10122,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 13,
-   "category": "IC-Label",
-   "template": "Internal Confidential",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 14,
-   "category": "IC-Label",
-   "template": "Internal Confidential",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 15,
    "category": "IC-Label",
    "template": "Internal Confidential",
@@ -12978,30 +10154,6 @@
    "clientPair": "OWA TO WODC Old(Classic)",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 18,
-   "category": "IC-Label",
-   "template": "Internal Confidential",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 19,
-   "category": "IC-Label",
-   "template": "Internal Confidential",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -13162,30 +10314,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 33,
-   "category": "IC-Label",
-   "template": "Internal Confidential",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 34,
-   "category": "IC-Label",
-   "template": "Internal Confidential",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 35,
    "category": "IC-Label",
    "template": "Internal Confidential",
@@ -13218,30 +10346,6 @@
    "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 38,
-   "category": "IC-Label",
-   "template": "Internal Confidential",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 39,
-   "category": "IC-Label",
-   "template": "Internal Confidential",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -13282,30 +10386,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 43,
-   "category": "IC-Label",
-   "template": "Internal Confidential",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 44,
-   "category": "IC-Label",
-   "template": "Internal Confidential",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 45,
    "category": "IC-Label",
    "template": "Internal Confidential",
@@ -13338,30 +10418,6 @@
    "clientPair": "OWA TO WODC New",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 48,
-   "category": "IC-Label",
-   "template": "Internal Confidential",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 49,
-   "category": "IC-Label",
-   "template": "Internal Confidential",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -13522,30 +10578,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 63,
-   "category": "IC-Label",
-   "template": "Internal Confidential",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 64,
-   "category": "IC-Label",
-   "template": "Internal Confidential",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 65,
    "category": "IC-Label",
    "template": "Internal Confidential",
@@ -13578,30 +10610,6 @@
    "clientPair": "WODC New TO WODC New",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 68,
-   "category": "IC-Label",
-   "template": "Internal Confidential",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 69,
-   "category": "IC-Label",
-   "template": "Internal Confidential",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -13762,30 +10770,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 83,
-   "category": "IC-Label",
-   "template": "Internal Confidential",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 84,
-   "category": "IC-Label",
-   "template": "Internal Confidential",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 85,
    "category": "IC-Label",
    "template": "Internal Confidential",
@@ -13818,30 +10802,6 @@
    "clientPair": "OWA TO WODC Old(Classic)",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 88,
-   "category": "IC-Label",
-   "template": "Internal Confidential",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 89,
-   "category": "IC-Label",
-   "template": "Internal Confidential",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -14002,30 +10962,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 103,
-   "category": "IC-Label",
-   "template": "Internal Confidential",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 104,
-   "category": "IC-Label",
-   "template": "Internal Confidential",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 105,
    "category": "IC-Label",
    "template": "Internal Confidential",
@@ -14058,30 +10994,6 @@
    "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 108,
-   "category": "IC-Label",
-   "template": "Internal Confidential",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 109,
-   "category": "IC-Label",
-   "template": "Internal Confidential",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -14122,30 +11034,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 113,
-   "category": "IC-Label",
-   "template": "Internal Confidential",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 114,
-   "category": "IC-Label",
-   "template": "Internal Confidential",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 115,
    "category": "IC-Label",
    "template": "Internal Confidential",
@@ -14178,30 +11066,6 @@
    "clientPair": "OWA TO WODC New",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 118,
-   "category": "IC-Label",
-   "template": "Internal Confidential",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 119,
-   "category": "IC-Label",
-   "template": "Internal Confidential",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -14362,30 +11226,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 133,
-   "category": "IC-Label",
-   "template": "Internal Confidential",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 134,
-   "category": "IC-Label",
-   "template": "Internal Confidential",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 135,
    "category": "IC-Label",
    "template": "Internal Confidential",
@@ -14418,30 +11258,6 @@
    "clientPair": "WODC New TO WODC New",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 138,
-   "category": "IC-Label",
-   "template": "Internal Confidential",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 139,
-   "category": "IC-Label",
-   "template": "Internal Confidential",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -14602,30 +11418,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 153,
-   "category": "IC-Label",
-   "template": "Internal Confidential",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 154,
-   "category": "IC-Label",
-   "template": "Internal Confidential",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 155,
    "category": "IC-Label",
    "template": "Internal Confidential",
@@ -14658,30 +11450,6 @@
    "clientPair": "OWA TO WODC Old(Classic)",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 158,
-   "category": "IC-Label",
-   "template": "Internal Confidential",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 159,
-   "category": "IC-Label",
-   "template": "Internal Confidential",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -14842,30 +11610,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 173,
-   "category": "IC-Label",
-   "template": "Internal Confidential",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 174,
-   "category": "IC-Label",
-   "template": "Internal Confidential",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 175,
    "category": "IC-Label",
    "template": "Internal Confidential",
@@ -14898,30 +11642,6 @@
    "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 178,
-   "category": "IC-Label",
-   "template": "Internal Confidential",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 179,
-   "category": "IC-Label",
-   "template": "Internal Confidential",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -14962,30 +11682,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 183,
-   "category": "IC-Label",
-   "template": "Internal Confidential",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 184,
-   "category": "IC-Label",
-   "template": "Internal Confidential",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 185,
    "category": "IC-Label",
    "template": "Internal Confidential",
@@ -15018,30 +11714,6 @@
    "clientPair": "OWA TO WODC New",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 188,
-   "category": "IC-Label",
-   "template": "Internal Confidential",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 189,
-   "category": "IC-Label",
-   "template": "Internal Confidential",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -15202,30 +11874,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 203,
-   "category": "IC-Label",
-   "template": "Internal Confidential",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 204,
-   "category": "IC-Label",
-   "template": "Internal Confidential",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 205,
    "category": "IC-Label",
    "template": "Internal Confidential",
@@ -15258,30 +11906,6 @@
    "clientPair": "WODC New TO WODC New",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 208,
-   "category": "IC-Label",
-   "template": "Internal Confidential",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 209,
-   "category": "IC-Label",
-   "template": "Internal Confidential",
-   "trigger": "Label",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -15442,30 +12066,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 13,
-   "category": "IC-Subject",
-   "template": "Internal Confidential",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 14,
-   "category": "IC-Subject",
-   "template": "Internal Confidential",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 15,
    "category": "IC-Subject",
    "template": "Internal Confidential",
@@ -15498,30 +12098,6 @@
    "clientPair": "OWA TO WODC Old(Classic)",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 18,
-   "category": "IC-Subject",
-   "template": "Internal Confidential",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 19,
-   "category": "IC-Subject",
-   "template": "Internal Confidential",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -15682,30 +12258,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 33,
-   "category": "IC-Subject",
-   "template": "Internal Confidential",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 34,
-   "category": "IC-Subject",
-   "template": "Internal Confidential",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 35,
    "category": "IC-Subject",
    "template": "Internal Confidential",
@@ -15738,30 +12290,6 @@
    "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 38,
-   "category": "IC-Subject",
-   "template": "Internal Confidential",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 39,
-   "category": "IC-Subject",
-   "template": "Internal Confidential",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -15802,30 +12330,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 43,
-   "category": "IC-Subject",
-   "template": "Internal Confidential",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 44,
-   "category": "IC-Subject",
-   "template": "Internal Confidential",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 45,
    "category": "IC-Subject",
    "template": "Internal Confidential",
@@ -15858,30 +12362,6 @@
    "clientPair": "OWA TO WODC New",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 48,
-   "category": "IC-Subject",
-   "template": "Internal Confidential",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 49,
-   "category": "IC-Subject",
-   "template": "Internal Confidential",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -16042,30 +12522,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 63,
-   "category": "IC-Subject",
-   "template": "Internal Confidential",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 64,
-   "category": "IC-Subject",
-   "template": "Internal Confidential",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 65,
    "category": "IC-Subject",
    "template": "Internal Confidential",
@@ -16098,30 +12554,6 @@
    "clientPair": "WODC New TO WODC New",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 68,
-   "category": "IC-Subject",
-   "template": "Internal Confidential",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 69,
-   "category": "IC-Subject",
-   "template": "Internal Confidential",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -16282,30 +12714,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 83,
-   "category": "IC-Subject",
-   "template": "Internal Confidential",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 84,
-   "category": "IC-Subject",
-   "template": "Internal Confidential",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 85,
    "category": "IC-Subject",
    "template": "Internal Confidential",
@@ -16338,30 +12746,6 @@
    "clientPair": "OWA TO WODC Old(Classic)",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 88,
-   "category": "IC-Subject",
-   "template": "Internal Confidential",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 89,
-   "category": "IC-Subject",
-   "template": "Internal Confidential",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -16522,30 +12906,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 103,
-   "category": "IC-Subject",
-   "template": "Internal Confidential",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 104,
-   "category": "IC-Subject",
-   "template": "Internal Confidential",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 105,
    "category": "IC-Subject",
    "template": "Internal Confidential",
@@ -16578,30 +12938,6 @@
    "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 108,
-   "category": "IC-Subject",
-   "template": "Internal Confidential",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 109,
-   "category": "IC-Subject",
-   "template": "Internal Confidential",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -16642,30 +12978,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 113,
-   "category": "IC-Subject",
-   "template": "Internal Confidential",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 114,
-   "category": "IC-Subject",
-   "template": "Internal Confidential",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 115,
    "category": "IC-Subject",
    "template": "Internal Confidential",
@@ -16698,30 +13010,6 @@
    "clientPair": "OWA TO WODC New",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 118,
-   "category": "IC-Subject",
-   "template": "Internal Confidential",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 119,
-   "category": "IC-Subject",
-   "template": "Internal Confidential",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -16882,30 +13170,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 133,
-   "category": "IC-Subject",
-   "template": "Internal Confidential",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 134,
-   "category": "IC-Subject",
-   "template": "Internal Confidential",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 135,
    "category": "IC-Subject",
    "template": "Internal Confidential",
@@ -16938,30 +13202,6 @@
    "clientPair": "WODC New TO WODC New",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 138,
-   "category": "IC-Subject",
-   "template": "Internal Confidential",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 139,
-   "category": "IC-Subject",
-   "template": "Internal Confidential",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -17122,30 +13362,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 153,
-   "category": "IC-Subject",
-   "template": "Internal Confidential",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 154,
-   "category": "IC-Subject",
-   "template": "Internal Confidential",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 155,
    "category": "IC-Subject",
    "template": "Internal Confidential",
@@ -17178,30 +13394,6 @@
    "clientPair": "OWA TO WODC Old(Classic)",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 158,
-   "category": "IC-Subject",
-   "template": "Internal Confidential",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 159,
-   "category": "IC-Subject",
-   "template": "Internal Confidential",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "OWA TO WODC Old(Classic)",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -17362,30 +13554,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 173,
-   "category": "IC-Subject",
-   "template": "Internal Confidential",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 174,
-   "category": "IC-Subject",
-   "template": "Internal Confidential",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 175,
    "category": "IC-Subject",
    "template": "Internal Confidential",
@@ -17418,30 +13586,6 @@
    "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 178,
-   "category": "IC-Subject",
-   "template": "Internal Confidential",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 179,
-   "category": "IC-Subject",
-   "template": "Internal Confidential",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "WODC Old(Classic) TO WODC Old(Classic)",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -17482,30 +13626,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 183,
-   "category": "IC-Subject",
-   "template": "Internal Confidential",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 184,
-   "category": "IC-Subject",
-   "template": "Internal Confidential",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 185,
    "category": "IC-Subject",
    "template": "Internal Confidential",
@@ -17538,30 +13658,6 @@
    "clientPair": "OWA TO WODC New",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 188,
-   "category": "IC-Subject",
-   "template": "Internal Confidential",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 189,
-   "category": "IC-Subject",
-   "template": "Internal Confidential",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "OWA TO WODC New",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
@@ -17722,30 +13818,6 @@
    "automationTier": "C"
   },
   {
-   "tcId": 203,
-   "category": "IC-Subject",
-   "template": "Internal Confidential",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "Prod to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 204,
-   "category": "IC-Subject",
-   "template": "Internal Confidential",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "Prod to Yahoo",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
    "tcId": 205,
    "category": "IC-Subject",
    "template": "Internal Confidential",
@@ -17778,30 +13850,6 @@
    "clientPair": "WODC New TO WODC New",
    "tenantPair": "SDF to SDF",
    "status": "Pass",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 208,
-   "category": "IC-Subject",
-   "template": "Internal Confidential",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "SDF to Gmail",
-   "status": "NA",
-   "defectTheme": "",
-   "automationTier": "C"
-  },
-  {
-   "tcId": 209,
-   "category": "IC-Subject",
-   "template": "Internal Confidential",
-   "trigger": "Subject keyword",
-   "action": "NA",
-   "clientPair": "WODC New TO WODC New",
-   "tenantPair": "SDF to Yahoo",
-   "status": "NA",
    "defectTheme": "",
    "automationTier": "C"
   },
